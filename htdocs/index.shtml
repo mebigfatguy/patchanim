@@ -1,0 +1,96 @@
+<html>
+	<head>
+		<title>PatchAnim - A Bezier Surface based blend animation tool</title>
+		<meta name="Keywords" content="animated blends gradients gif png mng jpeg bezier curve patch tween java webstart">
+		<script src="mbfg.js">
+		</script>
+		<link rel="stylesheet" type="text/css" href="mbfg.css" />
+	</head>
+	<body background>
+		<div style="position:absolute;top:0;left:0;width:256;height:65535;z-index:1;background-image:url(blend.jpg);">
+		</div>
+		<div style="position:absolute;top:20;left:20;z-index:3;">
+			<h1><img style="position:relative;top:10;" src="colorwheel.png"/>&nbsp;PatchAnim</h1>
+			<hr/>
+			<a href="http://www.sourceforge.net/projects/patchanim">Project Page</a>
+			<img src="vbar.gif" height="12"/>
+			<a href="javadoc/index.html">JavaDoc</a>
+			<img src="vbar.gif" height="12"/>
+			<a href="jnlp/patchanim.jnlp">Web Start</a>
+			<!--#include virtual="mbfg_menu.shtml" --> 
+			<hr/>
+	
+			<p>Thanks for your interest in PatchAnim.</p>
+			
+			<p>This tool creates a sequence of color blends using 
+			<a href="http://en.wikipedia.org/wiki/B%C3%A9zier_surface">Bezier Patches</a>. This sequence of blends is tweened and 
+			animated giving smooth transitions from one blend to another. Blend animations can be outputted to animated gifs, animated pngs, animated mngs 
+			or a series of gifs, pngs or jpegs.</p>
+			<div style="position:relative;left:100;"><img src="animation.gif"/></div>
+			<p>Unfortunately gif files are 256 color images, and so you get some grainyness. If you have 
+			<a href="http://developer.mozilla.org/en/docs/Main_Page">FireFox 3.0</a> with the 
+			<a href="https://addons.mozilla.org/en-US/firefox/addon/5519">APNG Edit</a> plugin, you can see the following 
+			Animated Png, which is shown in 24 bit color. If you do not, you will just see a still image.</p>
+			<div style="position:relative;left:100;"><img src="animation.png"/></div>
+			<p>A Cubic Bezier <b>curve</b> is a curve defined by 4 control points. The curve goes thru both end points, and
+			the curve is influenced by the two middle points. In fact the slope of the curve at the first point is equal to
+			the slope of the line from the first to the second point. Similarly the slope of the curve at the end point is 
+			equal to the slope of the line from the third to the fourth point. Rather than calculating a point on a curve, 
+			this application uses the shape of the curve to determine a color. In the following diagram, the y axis denotes 
+			a color from black to a full primary color (red in this case). By using a curve, we can give a separate color for 
+			each section of the curve, as seen in the color blend below the curve.</p>
+			<div style="position:relative;left:300px;"/><img src="bezier.jpg"/></div>
+			<p>Now this tool uses Bezier <b>patches</b>, not curves. A Cubic Bezier patch is a description of a 3D surface 
+			consisting of 16 control points. You can think of a patch as a set of bezier curves running in parallel along the 
+			x axis, and a cross cutting set of curves running along the y axis. (This is an over-simplification, and in fact incorrect,
+			but is good enough to understand what this application is doing). Again, though, the z value in 
+			this application is mapped to a color, where values of 0 are mapped to black, and values of 255 
+			are mapped to full color (in this case red). In the color blend samples, then, you can imagine that 
+			you are looking straight down on the patch from above. In this application, you can only move the control points
+			in the z direction (into the screen or out of the screen), the x and y positions are fixed.</p>
+
+			<p>To accomplish creating the desired effect, three such patches are available, one for red, green and blue.
+			Each patch only controls one primary color, and then the values from each patch is put together
+			to generate one full color blend. Since the description of the blend is very succinct (just 3 * 16 points), It is 
+			very easy to generate in-between images from two separate blend descriptions.</p>
+
+			<p>February 23, 2008</p>
+			<ul>
+				<li>Support for controlling transparency with a separate alpha patch</li>
+				<li>Context Patch menu option to shift patch in any direction</li> 
+				<li>Context Patch menu option to generate radial gradients for patch values</li>
+				<li>Added a new Out Of Bounds Color option, now available: Clip, Cycle, Roll</li>
+				<li>Context Patch menu option to invert the patch</li>
+				<li>Context Patch menu option to generate linear gradients for patch values</li>
+				<li>Patches can now be any order from 2 - 9, specified on the new dialog</li>
+			</ul>
+			<p>December 27, 2008</p>
+			<ul>
+				<li>Support for tween styles, or how one patch transitions into another patch</li>
+			</ul>
+			<p>January 2, 2009</p>
+			<ul>
+				<li>Added Shape gradients</li>
+			</ul>
+			<p>If you would like to see the tool as it progresses, you can run the webstart version
+			   <a href="jnlp/patchanim.jnlp">here.</a></p>
+			<img src="sample.jpg"/>
+			<p><table cellpadding="10">
+				<tr>
+					<td><img src="order.gif"/></td>
+					<td><img src="nameediting.jpg"/></td>
+					<td><img src="patchediting.jpg"/></td>
+				</tr>
+				</table></p>
+		</div>
+		<script type="text/javascript">
+			var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+			document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+		<script type="text/javascript">
+			var pageTracker = _gat._getTracker("UA-249537-2");
+			pageTracker._initData();
+			pageTracker._trackPageview();
+		</script>
+	</body>
+</html>

@@ -1,0 +1,5 @@
+classes
+*.jar
+*.zip
+.svn
+.settings

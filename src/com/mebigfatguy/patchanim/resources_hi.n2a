@@ -1,0 +1,113 @@
+/*
+ * patchanim - A bezier surface patch color blend animation builder
+ * Copyright (C) 2008-2010 Dave Brosius
+ * 
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ * 
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+patchanim.title = PatchAnim
+patchanim.namedtitle = PatchAnim - {0}
+patchanim.untitled = शीर्षकहीन
+patchanim.file = फ़ाइल
+patchanim.new = नया
+patchanim.open = खुला होना...
+patchanim.save = बचाना
+patchanim.saveas = के रूप में सहेजें...
+patchanim.patchanimfilter = PatchAnim फ़ाइलें (*. paf)
+patchanim.export = निर्यात के रूप में...
+patchanim.jpgs = JPGs की एक श्रृंखला
+patchanim.filter.jpgs = फ़ाइलें (*. jpg)
+patchanim.pngs = PNGs की श्रृंखला
+patchanim.filter.pngs = PNG फ़ाइलें (*. png)
+patchanim.gifs = GIFs की श्रृंखला
+patchanim.filter.gifs = GIF फ़ाइलें (*. gif)
+patchanim.animatedgif = एक एनिमेटेड GIF
+patchanim.filter.animatedgif = GIF फ़ाइलें (*. gif)
+patchanim.apng = एक एनिमेटेड PNG
+patchanim.filter.apng = PNG फ़ाइलें (*. png)
+patchanim.mng = एक एनिमेटेड MNG
+patchanim.filter.mng = MNG फ़ाइलें (*. mng)
+patchanim.exportfile = निर्यात एनिमेशन
+patchanim.quit = छोड़ो
+patchanim.control = नियंत्रण
+patchanim.newdocument = नई PatchAnim दस्तावेज़ सेटिंग्स
+patchanim.setorder = सेट पैच करने के आदेश
+patchanim.usealpha = का प्रयोग करें अल्फा चैनल (पारदर्शिता)
+patchanim.ok = ठीक है
+patchanim.cancel = रद्द करें
+patchanim.patches = पैच
+patchanim.width = चौड़ाई
+patchanim.tooltip.width = के निर्यात एनीमेशन की चौड़ाई
+patchanim.height = ऊँचाई
+patchanim.tooltip.height = के निर्यात एनीमेशन की ऊंचाई
+patchanim.animation = एनिमेशन दोहराएँ
+patchanim.tooltip.animation = दोहराव के प्रकार है कि एनीमेशन का उपयोग करता है
+patchanim.type.none = कोई नहीं
+patchanim.type.cycle = साइकिल
+patchanim.type.wave = तरंग
+patchanim.outofboundscolor = सीमा से बाहर का रंग
+patchanim.tooltip.outofboundscolor = कि 0 की सीमा से बाहर हैं कैसे रंग - 255 संभाला हैं
+patchanim.oob.clip = क्लिप
+patchanim.oob.cycle = साइकिल
+patchanim.oob.wave = तरंग
+patchanim.tween = में बीच तख्ते
+patchanim.tooltip.tween = कितने तख्ते बदलाव के रूप में एक पैच से उत्पन्न कर रहे हैं कि अगले
+patchanim.tweenstyle = Tween शैली
+patchanim.tooltip.tweenstyle = इस एल्गोरिथ्म परिवर्तन करने के लिए एक पैच से दूसरे प्रयोग किया
+patchanim.tweenstyle.linear = रैखिक
+patchanim.tweenstyle.accelerating = त्वरक
+patchanim.tweenstyle.decelerating = Decelerating
+patchanim.tweenstyle.easeineaseout = आराम में / आसानी से
+patchanim.tweenstyle.accelerateinaccelerateout = गति में / तेजी से
+patchanim.tweenstyle.wave = तरंग
+patchanim.test = परीक्षण
+patchanim.tooltip.test = टेस्ट के एनीमेशन निर्यात सेटिंग्स का उपयोग करते हुए
+patchanim.stop = रुकना
+patchanim.defaultpatchname = पैच निर्देशांक
+patchanim.enternewpatchname = नाम बदलें पैच करने के लिए
+patchanim.add = जोड़ना
+patchanim.remove = हटाना
+patchanim.rename = नाम बदलें
+patchanim.clone = क्लोन
+patchanim.color = रंग
+patchanim.setallpoints = सेट सभी बिंदुओं पर नियंत्रण करने के लिए...
+patchanim.setborderpoints = निर्धारित सीमा के अंक के लिए...
+patchanim.black = काला
+patchanim.fullcolor = पूर्ण रंग
+patchanim.value = मूल्य...
+patchanim.lightenpatch = हल्का पैच
+patchanim.darkenpatch = अंधा पैच
+patchanim.lineargradient = रैखिक ग्रेडियेंट...
+patchanim.lefttoright = दाएँ से बाएँ
+patchanim.toptobottom = ऊपर से नीचे
+patchanim.righttoleft = ठीक करने के लिए वामपंथियों
+patchanim.bottomtotop = ऊपर से नीचे
+patchanim.radialgradient = रेडियल ग्रेडियेंट...
+patchanim.shapegradient = आकार ग्रेडियेंट...
+patchanim.outward = जावक
+patchanim.inward = आवक
+patchanim.shift = खिसकाना...
+patchanim.left = छोड़ा
+patchanim.down = नीचे
+patchanim.right = सही
+patchanim.up = ऊपर
+patchanim.invert = उलटा
+patchanim.copypatchfrom = कॉपी पैच से...
+patchanim.redpatch = लाल पैच
+patchanim.greenpatch = ग्रीन पैच
+patchanim.bluepatch = ब्लू पैच
+patchanim.asksave = आप अपने परिवर्तनों को सहेजना चाहते हैं?
+patchanim.err.savefailed = असफल बचाने पैच एनिमेशन संचिका
+patchanim.err.loadfailed = असफल लोड पैच एनिमेशन संचिका
+patchanim.err.exportfailed = असफल निर्यात पैच एनिमेशन

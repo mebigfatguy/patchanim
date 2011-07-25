@@ -1,0 +1,95 @@
+<!--
+/*
+ * patchanim - A bezier surface patch color blend animation builder
+ * Copyright (C) 2008 Dave Brosius
+ * 
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ * 
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+ -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:complexType name="PatchAnimDocClass">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Settings" type="SettingsClass"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Patches" type="PatchesClass"/>
+        </xsd:sequence>
+        <xsd:attribute name="version" type="xsd:string" use="required"/>
+    </xsd:complexType>
+    <xsd:complexType name="SettingsClass">
+        <xsd:attribute name="alpha" type="xsd:boolean" default="false"/>
+        <xsd:attribute name="animationType" type="AnimationTypeClass" use="required"/>
+        <xsd:attribute name="height" type="xsd:integer" use="required"/>
+        <xsd:attribute name="order" type="xsd:positiveInteger" default="4"/>
+        <xsd:attribute name="outOfBoundsColor" type="OutOfBoundsColorClass" use="required"/>
+        <xsd:attribute name="tweenCount" type="xsd:integer" use="required"/>
+        <xsd:attribute name="width" type="xsd:integer" use="required"/>
+        <xsd:attribute name="tweenStyle" type="xsd:TweenStyleClass" use="required"/>
+    </xsd:complexType>
+    <xsd:simpleType name="AnimationTypeClass">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:enumeration value="None"/>
+    		<xsd:enumeration value="Cycle"/>
+    		<xsd:enumeration value="Wave"/>
+    	</xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="OutOfBoundsColorClass">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:enumeration value="Clip"/>
+    		<xsd:enumeration value="Cycle"/>
+    		<xsd:enumeration value="Wave"/>
+    	</xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="ColorClass">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Red"/>
+            <xsd:enumeration value="Green"/>
+            <xsd:enumeration value="Blue"/>
+            <xsd:enumeration value="Alpha"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="TweenStyleClass">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:enumeration value="Linear"/>
+    		<xsd:enumeration value="Radial"/>
+    	</xsd:restriction>	
+    </xsd:simpleType>
+    <xsd:complexType name="CoordinateClass">
+        <xsd:attribute name="color" type="xsd:double" use="required"/>
+        <xsd:attribute name="x" type="xsd:double" use="required"/>
+        <xsd:attribute name="y" type="xsd:double" use="required"/>
+    </xsd:complexType>
+    <xsd:complexType name="PatchClass">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" name="Coordinate" type="CoordinateClass"/>
+        </xsd:sequence>
+        <xsd:attribute name="color" type="ColorClass" use="required"/>
+    </xsd:complexType>
+    <xsd:complexType name="CombinedPatchClass">
+        <xsd:sequence>
+            <xsd:element maxOccurs="4" minOccurs="3" name="Patch" type="PatchClass"/>
+        </xsd:sequence>
+        <xsd:attribute name="name" type="NameClass" use="required"/>
+    </xsd:complexType>
+    <xsd:simpleType name="NameClass">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Patch Coordinates"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="PatchesClass">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" name="CombinedPatch" type="CombinedPatchClass"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="PatchAnimDoc" type="PatchAnimDocClass"/>
+</xsd:schema>

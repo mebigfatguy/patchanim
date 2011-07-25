@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<jnlp 
+  spec="1.0+" 
+  codebase="http://patchanim.sourceforge.net/jnlp" 
+  href="patchanim.jnlp">
+  <information> 
+    <title>PatchAnim</title>
+    <vendor>MeBigFatGuy.com</vendor> 
+    <homepage href="http://patchanim.sourceforge.net"/> 
+    <description>Bezier Surface Patch Blend creation tool</description> 
+    <description kind="short">A tool for creating animated color blends based on Bezier Surface patches</description> 
+    <offline-allowed/> 
+  </information> 
+  <security> 
+      <all-permissions/> 
+  </security> 
+  <resources> 
+    <j2se version="1.5+" initial-heap-size="300m" max-heap-size="800m"/>
+    <jar href="patchanim-$VERSION.jar"/> 
+    <jar href="xml-apis.jar"/> 
+    <jar href="xalan.jar"/> 
+    <jar href="xercesImpl.jar"/> 
+    <jar href="serializer.jar"/> 
+  </resources> 
+  <application-desc main-class="com.mebigfatguy.patchanim.main.PatchMain"/> 
+</jnlp> 
+

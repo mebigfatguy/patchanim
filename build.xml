@@ -1,0 +1,190 @@
+<!--
+/*
+ * patchanim - Bezier Blend Batch Animation Builder
+ * Copyright (C) 2008-2010 Dave Brosius
+ * 
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ * 
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+ -->
+
+<project name="patchanim" default="jar">
+	
+	<property file="build.properties"/>
+	
+	<property name="src.dir" value="${basedir}/src"/>
+	<property name="classes.dir" value="${basedir}/classes"/>
+	<property name="lib.dir" value="${basedir}/lib"/>
+	<property name="etc.dir" value="${basedir}/etc"/>
+	<property name="htdocs.dir" value="${basedir}/htdocs"/>
+	<property name="jnlp.dir" value="${htdocs.dir}/jnlp"/>
+	<property name="javadoc.dir" value="${htdocs.dir}/javadoc"/>
+	<property name="javac.source" value="1.5"/>
+	<property name="javac.target" value="1.5"/>
+	<property name="javac.deprecation" value="on"/>
+	<property name="javac.debug" value="on"/>
+	
+	<property name="patchanim.version" value="1.3.0"/>
+	
+	<target name="clean" description="removes all generated collateral">
+		<delete dir="${classes.dir}"/>
+		<delete dir="${javadoc.dir}"/>
+		<delete>
+			<fileset dir="${jnlp.dir}">
+				<include name="patchanim*.jar"/>
+				<include name="*.jnlp"/>
+			</fileset>
+		</delete>
+		<delete>
+    		<fileset dir="${basedir}" includes="*.zip"/>
+  		</delete>
+	</target>
+	
+	<target name="-init" description="prepares repository for a build">
+		<mkdir dir="${classes.dir}"/>
+		<mkdir dir="${javadoc.dir}"/>
+		<path id="patchanim.classpath">
+			<pathelement location="${lib.dir}/xml-apis.jar"/>
+			<pathelement location="${lib.dir}/xalan.jar"/>
+			<pathelement location="${lib.dir}/xercesImpl.jar"/>
+			<pathelement location="${lib.dir}/serializer.jar"/>
+		</path>
+	</target>
+		
+	<target name="compile" depends="-init" description="compiles java files">
+		<javac srcdir="${src.dir}"
+				destdir="${classes.dir}"
+				source="${javac.source}"
+				target="${javac.target}"
+				deprecation="${javac.deprecation}"
+				debug="${javac.debug}">
+			<classpath refid="patchanim.classpath"/>
+		</javac>
+	</target>
+	
+	<target name="resources" depends="-init" description="copies required files">
+		<copy todir="${classes.dir}">
+			<fileset dir="${src.dir}">
+				<include name="**/*.properties"/>
+				<include name="**/*.gif"/>
+				<include name="**/*.xsd"/>
+				<include name="**/*.xsl"/>
+				<include name="**/*.jpg"/>
+			</fileset>
+		</copy>
+		<echo message="${patchanim.version}" file="${classes.dir}/com/mebigfatguy/patchanim/io/Version.txt"/>
+		<copy todir="${jnlp.dir}">
+			<fileset dir="${etc.dir}">
+				<include name="*.jnlp"/>
+			</fileset>
+		</copy>
+		<replaceregexp byline="true">
+  			<regexp pattern="\$VERSION"/>
+  			<substitution expression="${patchanim.version}"/>
+  			<fileset dir="${jnlp.dir}">
+   				<include name="*.jnlp"/>
+  			</fileset>
+ 		</replaceregexp>
+	</target>
+	
+	<target name="jar" depends="compile, resources" description="produces the patchanim jar file">
+		<jar destfile="${jnlp.dir}/patchanim-${patchanim.version}.jar">
+			<fileset dir="${classes.dir}">
+				<include name="**/*.class"/>
+				<include name="**/*.properties"/>
+				<include name="**/*.gif"/>
+				<include name="**/*.xsd"/>
+				<include name="**/*.xsl"/>
+				<include name="**/*.txt"/>
+				<include name="**/*.jpg"/>
+			</fileset>
+			<fileset dir="${basedir}">
+				<include name="license.txt"/>
+			</fileset>
+			<manifest>
+				<attribute name="patchanim-version" value="${patchanim.version}"/>
+				<attribute name="Main-Class" value="com.mebigfatguy.patchanim.main.PatchMain"/>
+				<attribute name="Class-Path" value="xml-apis.jar xalan.jar xercesImpl.jar serializer.jar"/>
+			</manifest>
+		</jar>	
+	</target>
+	
+	<target name="srczip" description="builds the source distribution zip file">
+		<zip destfile="${basedir}/patchanim-src-${patchanim.version}.zip" 
+			 basedir="${basedir}"
+			 includes="src/**/*.java, src/**/*.properties, src/**/*.gif, src/**/*.xsd, src/**/*.xsl, lib/**/*.jar, *.txt"/>
+	</target>
+	
+	<target name="javadoc" depends="-init" description="build the javadoc for the project">
+		<javadoc packagenames="com.mebigfatguy.*"
+				 sourcepath="${src.dir}"
+				 classpathref="patchanim.classpath"
+				 destdir="${javadoc.dir}"
+				 windowtitle="patchanim api">
+		    <doctitle><![CDATA[<h1>patchanim javadoc</h1>]]></doctitle>
+		    <bottom><![CDATA[<i>Copyright &#169; 2008-2010 MeBigFatGuy.com. All Rights Reserved.</i>]]></bottom>
+		</javadoc>
+	</target>
+	
+	<target name="test" depends="-init, compile, resources" description="runs unit tests">
+		<path id="patchanimtest.classpath">
+			<pathelement location="${classes.dir}"/>
+		</path>
+        <junit
+            printsummary="true"
+            haltonfailure="true"
+            haltonerror="true"
+            showoutput="true"
+            fork="true">
+
+            <classpath><path refid="patchanimtest.classpath"/></classpath>
+            <batchtest fork="true">
+                <fileset dir="${classes.dir}"
+                	excludes="test/*$*"
+                    includes="test/*"/>
+            </batchtest>
+        </junit>
+	</target>
+	
+	<target name="build" depends="clean, -init, compile, resources, test, jar" description="builds the patchanim jar"/>
+	
+	<target name="jnlp" description="copy jars to jnlp directory">
+		<copy todir="${jnlp.dir}">
+			<fileset dir="${lib.dir}">
+				<include name="*.jar"/>
+			</fileset>
+			<fileset dir="${basedir}">
+				<include name="*.jar"/>
+			</fileset>
+		</copy>
+		<input message="Enter keystore password" addproperty="pass"/>
+		<signjar keystore="patchanim.store" 
+		         alias="patchanim"
+		         keypass="${pass}"
+		         storepass="${pass}">
+		    <fileset dir="${jnlp.dir}">
+				<include name="*.jar"/>
+			</fileset>
+		</signjar>
+	</target>
+	
+	<target name="binzip" depends="build" description="zips up all jars">
+		<zip destfile="${basedir}/patchanim-bin-${patchanim.version}.zip" 
+			 basedir="${jnlp.dir}"
+			 includes="patchanim-${patchanim.version}.jar xml-apis.jar xercesImpl.jar xalan.jar serializer.jar"/>
+	</target>
+	
+	<target name="release" depends="build, jnlp, binzip, srczip, javadoc" description="prepares everything for a release"/>
+
+</project>
