@@ -2,9 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/serializer.jar"/>
-	<classpathentry kind="lib" path="lib/xalan.jar"/>
-	<classpathentry kind="lib" path="lib/xercesImpl.jar"/>
-	<classpathentry kind="lib" path="lib/xml-apis.jar"/>
+	<classpathentry kind="lib" path="lib/serializer-2.7.1.jar"/>
+	<classpathentry kind="lib" path="lib/xalan-2.7.1.jar"/>
+	<classpathentry kind="lib" path="lib/xercesImpl-2.10.0.jar"/>
+	<classpathentry kind="lib" path="lib/xml-apis-2.0.2.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>
