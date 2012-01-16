@@ -47,7 +47,7 @@ public class PatchAnimExtension {
 		d = db.newDocument();
 	}
 	
-	public String getVersion(@SuppressWarnings("unused") ExpressionContext context) {
+	public String getVersion(ExpressionContext context) {
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new InputStreamReader(PatchAnimExtension.class.getResourceAsStream(VERSION_URL)));
@@ -59,39 +59,39 @@ public class PatchAnimExtension {
 		}
 	}
 	
-	public String getOrder(@SuppressWarnings("unused") ExpressionContext context) {
+	public String getOrder(ExpressionContext context) {
 		return String.valueOf(paDoc.getOrder());
 	}
 	
-	public String getWidth(@SuppressWarnings("unused") ExpressionContext context) {
+	public String getWidth(ExpressionContext context) {
 		return String.valueOf(paDoc.getWidth());
 	}
 	
-	public String getHeight(@SuppressWarnings("unused") ExpressionContext context) {
+	public String getHeight(ExpressionContext context) {
 		return String.valueOf(paDoc.getHeight());
 	}
 	
-	public String getAnimationType(@SuppressWarnings("unused") ExpressionContext context) {
+	public String getAnimationType(ExpressionContext context) {
 		return paDoc.getAnimationType().name();
 	}
 	
-	public String getOutOfBoundsColor(@SuppressWarnings("unused") ExpressionContext context) {
+	public String getOutOfBoundsColor(ExpressionContext context) {
 		return paDoc.getOutOfBoundsColor().name();
 	}
 
-	public String getTweenCount(@SuppressWarnings("unused") ExpressionContext context) {
+	public String getTweenCount(ExpressionContext context) {
 		return String.valueOf(paDoc.getTweenCount());
 	}
 	
-	public String getTweenStyle(@SuppressWarnings("unused") ExpressionContext context) {
+	public String getTweenStyle(ExpressionContext context) {
 		return String.valueOf(paDoc.getTweenStyle());
 	}
 
-	public String useAlpha(@SuppressWarnings("unused") ExpressionContext context) {
+	public String useAlpha(ExpressionContext context) {
 		return String.valueOf(paDoc.useAlpha());
 	}
 	
-	public NodeList getPatches(@SuppressWarnings("unused") ExpressionContext context) {
+	public NodeList getPatches(ExpressionContext context) {
 		return new NodeList() {
 
 			public int getLength() {
@@ -104,12 +104,12 @@ public class PatchAnimExtension {
 		};
 	}
 	
-	public String getPatchName(@SuppressWarnings("unused") ExpressionContext context, Node patchIndexNode) {
+	public String getPatchName(ExpressionContext context, Node patchIndexNode) {
 		int patchIndex = Integer.parseInt(patchIndexNode.getNodeValue());
 		return paDoc.getPatches().get(patchIndex).getName();
 	}
 	
-	public NodeList getCoordinates(@SuppressWarnings("unused") ExpressionContext context) {
+	public NodeList getCoordinates(ExpressionContext context) {
 		return new NodeList() {
 
 			public int getLength() {
@@ -123,15 +123,15 @@ public class PatchAnimExtension {
 		};
 	}
 	
-	public String getX(@SuppressWarnings("unused") ExpressionContext context, String color, Node patchIndexNode, Node coordIndexNode) {
+	public String getX(ExpressionContext context, String color, Node patchIndexNode, Node coordIndexNode) {
 		return String.valueOf(getCoordinate(color, patchIndexNode, coordIndexNode).getX());
 	}
 	
-	public String getY(@SuppressWarnings("unused") ExpressionContext context, String color, Node patchIndexNode, Node coordIndexNode) {
+	public String getY(ExpressionContext context, String color, Node patchIndexNode, Node coordIndexNode) {
 		return String.valueOf(getCoordinate(color, patchIndexNode, coordIndexNode).getY());
 	}
 	
-	public String getColor(@SuppressWarnings("unused") ExpressionContext context, String color, Node patchIndexNode, Node coordIndexNode) {
+	public String getColor(ExpressionContext context, String color, Node patchIndexNode, Node coordIndexNode) {
 		return String.valueOf(getCoordinate(color, patchIndexNode, coordIndexNode).getColor());
 	}
 	
