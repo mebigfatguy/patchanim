@@ -37,6 +37,16 @@
 	
 	<property name="patchanim.version" value="1.3.0"/>
 	
+	<property name="xml-apis.version" value="2.0.2"/>
+	<property name="xalan.version" value="2.7.1"/>
+	<property name="serializer.version" value="2.7.1"/>
+	<property name="xercesImpl.version" value="2.10.0"/>
+	
+    <property name="xml-apis-url" value="http://repo1.maven.org/maven2/xml-apis/xml-apis/${xml-apis.version}/xml-apis-${xml-apis.version}.jar"/> 
+    <property name="xalan-url" value="http://repo1.maven.org/maven2/xalan/xalan/${xalan.version}/xalan-${xalan.version}.jar"/> 
+    <property name="serializer-url" value="http://repo1.maven.org/maven2/xalan/serializer/${serializer.version}/serializer-${serializer.version}.jar"/> 
+    <property name="xercesImpl-url" value="http://repo1.maven.org/maven2/xerces/xercesImpl/${xercesImpl.version}/xercesImpl-${xercesImpl.version}.jar"/> 
+	
 	<target name="clean" description="removes all generated collateral">
 		<delete dir="${classes.dir}"/>
 		<delete dir="${javadoc.dir}"/>
@@ -51,24 +61,61 @@
   		</delete>
 	</target>
 	
+	<path id="patchanim.classpath">
+		<pathelement location="${lib.dir}/xml-apis-${xml-apis.version}.jar"/>
+		<pathelement location="${lib.dir}/xalan-${xalan.version}.jar"/>
+		<pathelement location="${lib.dir}/xercesImpl-${xercesImpl.version}.jar"/>
+		<pathelement location="${lib.dir}/serializer-${serializer.version}.jar"/>
+	</path>
+	
 	<target name="-init" description="prepares repository for a build">
+		<mkdir dir="${lib.dir}"/>
 		<mkdir dir="${classes.dir}"/>
 		<mkdir dir="${javadoc.dir}"/>
-		<path id="patchanim.classpath">
-			<pathelement location="${lib.dir}/xml-apis.jar"/>
-			<pathelement location="${lib.dir}/xalan.jar"/>
-			<pathelement location="${lib.dir}/xercesImpl.jar"/>
-			<pathelement location="${lib.dir}/serializer.jar"/>
-		</path>
 	</target>
-		
-	<target name="compile" depends="-init" description="compiles java files">
+	
+	<target name="xml-apis-check">
+        <available file="${basedir}/lib/xml-apis-${xml-apis.version}.jar" property="xml-apis-exists"/>
+    </target>
+
+	<target name="xalan-check">
+        <available file="${basedir}/lib/xalan-${xalan.version}.jar" property="xalan-exists"/>
+    </target>
+
+	<target name="serializer-check">
+        <available file="${basedir}/lib/serializer-${serializer.version}.jar" property="serializer-exists"/>
+    </target>
+
+	<target name="xercesImpl-check">
+        <available file="${basedir}/lib/xercesImpl-${xercesImpl.version}.jar" property="xercesImpl-exists"/>
+    </target>
+
+		<target name="install-xml-apis" depends="xml-apis-check" unless="xml-apis-exists" description="installs xml-apis.jar into lib">
+        <get src="${xml-apis-url}" dest="${basedir}/lib/xml-apis-${xml-apis.version}.jar" verbose="true" ignoreerrors="true"/>
+    </target>
+	
+    <target name="install-xalan" depends="xalan-check" unless="xalan-exists" description="installs xalan.jar into lib">
+        <get src="${xalan-url}" dest="${basedir}/lib/xalan-${xalan.version}.jar" verbose="true" ignoreerrors="true"/>
+    </target>
+
+    <target name="install-serializer" depends="serializer-check" unless="serializer-exists" description="installs serializer.jar into lib">
+        <get src="${serializer-url}" dest="${basedir}/lib/serializer-${serializer.version}.jar" verbose="true" ignoreerrors="true"/>
+    </target>
+        	
+    <target name="install-xercesImpl" depends="xercesImpl-check" unless="xercesImpl-exists" description="installs xercesImpl.jar into lib">
+        <get src="${xercesImpl-url}" dest="${basedir}/lib/xercesImpl-${xercesImpl.version}.jar" verbose="true" ignoreerrors="true"/>
+    </target>
+
+    <target name="pull" depends="install-xml-apis, install-xalan, install-serializer, install-xercesImpl" description="pull 3rdparty jars to the lib directory"/>
+
+		<target name="compile" depends="-init, pull" description="compiles java files">
 		<javac srcdir="${src.dir}"
 				destdir="${classes.dir}"
 				source="${javac.source}"
 				target="${javac.target}"
 				deprecation="${javac.deprecation}"
-				debug="${javac.debug}">
+				debug="${javac.debug}"
+			    includeantruntime="false">
 			<classpath refid="patchanim.classpath"/>
 		</javac>
 	</target>
@@ -115,7 +162,7 @@
 			<manifest>
 				<attribute name="patchanim-version" value="${patchanim.version}"/>
 				<attribute name="Main-Class" value="com.mebigfatguy.patchanim.main.PatchMain"/>
-				<attribute name="Class-Path" value="xml-apis.jar xalan.jar xercesImpl.jar serializer.jar"/>
+				<attribute name="Class-Path" value="xml-apis-${xml-apis.version}.jar xalan-${xalan.version}.jar xercesImpl-${xercesImpl.version}.jar serializer-${serializer-version}.jar"/>
 			</manifest>
 		</jar>	
 	</target>
@@ -182,7 +229,7 @@
 	<target name="binzip" depends="build" description="zips up all jars">
 		<zip destfile="${basedir}/patchanim-bin-${patchanim.version}.zip" 
 			 basedir="${jnlp.dir}"
-			 includes="patchanim-${patchanim.version}.jar xml-apis.jar xercesImpl.jar xalan.jar serializer.jar"/>
+			 includes="patchanim-${patchanim.version}.jar xml-apis-${xml-apis.version}.jar xercesImpl-${xercesImpl.version}.jar xalan-${xalan.version}.jar serializer-${serializer-version}.jar"/>
 	</target>
 	
 	<target name="release" depends="build, jnlp, binzip, srczip, javadoc" description="prepares everything for a release"/>
