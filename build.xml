@@ -19,9 +19,10 @@
  */
  -->
 
-<project name="patchanim" default="jar">
+<project name="patchanim" default="info" xmlns:yank="antlib:com.mebigfatguy.yank">
 	
 	<property file="build.properties"/>
+	   <property file="version.properties"/>
 	
 	<property name="src.dir" value="${basedir}/src"/>
 	<property name="classes.dir" value="${basedir}/classes"/>
@@ -68,7 +69,22 @@
 		<pathelement location="${lib.dir}/serializer-${serializer.version}.jar"/>
 	</path>
 	
-	<target name="-init" description="prepares repository for a build">
+    <target name="info">
+        <echo message="PatchAnim - a bezier patch animation tool for generating images"/>
+        <echo message=""/>
+        <echo message="    this project uses yank (https://github.com/mebigfatguy/yank) for dependency management"/>
+        <echo message="    download yank.jar and place in ant/lib directory"/>
+        <echo message="    http://search.maven.org/#artifactdetails%7Ccom.mebigfatguy.yank%7Cyank%7C0.4.2%7Cjar"/>
+    </target>
+    
+   <target name="yank">
+        <mkdir dir="${lib.dir}"/>
+        <yank:yank yankFile="${basedir}/yank.xls" destination="${lib.dir}" source="true">
+            <server url="http://jcenter.bintray.com"/>
+            <generateVersions propertyFileName="${basedir}/version.properties" />
+        </yank:yank>
+    </target>
+	<target name="-init" depends="yank" description="prepares repository for a build">
 		<mkdir dir="${lib.dir}"/>
 		<mkdir dir="${classes.dir}"/>
 		<mkdir dir="${javadoc.dir}"/>
