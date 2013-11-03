@@ -3,3 +3,7 @@ classes
 *.zip
 .svn
 .settings
+.~lock.yank.*
+version.properties
+htdocs
+
