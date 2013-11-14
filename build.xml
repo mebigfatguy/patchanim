@@ -22,7 +22,7 @@
 <project name="patchanim" default="info" xmlns:yank="antlib:com.mebigfatguy.yank">
 	
 	<property file="build.properties"/>
-	   <property file="version.properties"/>
+	<property file="version.properties"/>
 	
 	<property name="src.dir" value="${basedir}/src"/>
 	<property name="classes.dir" value="${basedir}/classes"/>
@@ -84,6 +84,7 @@
             <generateVersions propertyFileName="${basedir}/version.properties" />
         </yank:yank>
     </target>
+	
 	<target name="-init" depends="yank" description="prepares repository for a build">
 		<mkdir dir="${lib.dir}"/>
 		<mkdir dir="${classes.dir}"/>
