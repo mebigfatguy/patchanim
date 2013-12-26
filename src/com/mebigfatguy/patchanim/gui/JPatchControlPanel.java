@@ -148,6 +148,8 @@ public class JPatchControlPanel extends JPanel {
 			add(p);
 		}
 
+	    add(Box.createVerticalStrut(5));
+	      
 		testButton = new JButton(rb.getString(PatchAnimBundle.TEST));
 		testButton.setToolTipText(rb.getString(PatchAnimBundle.TEST_TT));
 		add(testButton);
