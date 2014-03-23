@@ -50,7 +50,11 @@ public class SourcePatchesPanel extends JPanel {
 		PatchPanelMediator mediator = PatchPanelMediator.getMediator();
 		mediator.addDocumentChangedListener(new DocumentChangedListener() {
 			public void documentChanged(DocumentChangedEvent dce) {
-				rebuild(dce.getDocument().useAlpha());
+			    boolean useAlpha = dce.getDocument().useAlpha();
+				rebuild(useAlpha);
+				redPatch.useAlpha(useAlpha);
+				greenPatch.useAlpha(useAlpha);
+				bluePatch.useAlpha(useAlpha);
 			}
 		});
 	}

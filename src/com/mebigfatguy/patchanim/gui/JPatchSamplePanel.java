@@ -65,6 +65,8 @@ public class JPatchSamplePanel extends JPanel {
 	private OutOfBoundsColor oob;
 	private transient BufferedImage image;
 	private PatchDecorator decorator;
+	private JPopupMenu contextMenu;
+	private JMenu copyPatchMenu;
 	private transient Thread redrawThread = null;
 	private final Object redrawLock = new Object();
 	private boolean redrawing = false;
@@ -93,6 +95,10 @@ public class JPatchSamplePanel extends JPanel {
 		setEnabled(true);
 	}
 	
+	public void useAlpha(boolean useAlpha) {
+	    copyPatchMenu.getMenuComponent(copyPatchMenu.getMenuComponentCount() - 1).setEnabled(useAlpha);
+	}
+	
 	private void initComponents() {
 		image = PatchGenerator.buildImage(rgb, false, SAMPLE_SIZE, SAMPLE_SIZE);
 		setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
@@ -100,6 +106,7 @@ public class JPatchSamplePanel extends JPanel {
 		setMinimumSize(d);
 		setMaximumSize(d);
 		setPreferredSize(d);
+		buildPatchContentMenu();
 	}
 	
 	private void initListeners() {
@@ -210,10 +217,14 @@ public class JPatchSamplePanel extends JPanel {
 	}
 	
 	private void showPatchContentMenu(MouseEvent me) {
+	    contextMenu.show(JPatchSamplePanel.this, me.getX(), me.getY());
+	}
+	
+	private void buildPatchContentMenu() {
 		final ResourceBundle rb = PatchAnimBundle.getBundle();
-		JPopupMenu menu = new JPopupMenu();
+		contextMenu = new JPopupMenu();
 		JMenu setAllItem = new JMenu(rb.getString(PatchAnimBundle.SETALLPOINTS));
-		menu.add(setAllItem);
+		contextMenu.add(setAllItem);
 		{
 			JMenuItem blackItem = new JMenuItem(rb.getString(PatchAnimBundle.BLACK));
 			blackItem.addActionListener(new ActionListener() {
@@ -246,7 +257,7 @@ public class JPatchSamplePanel extends JPanel {
 		}
 		
 		JMenu borderItem = new JMenu(rb.getString(PatchAnimBundle.SETBORDERPOINTS));
-		menu.add(borderItem);
+		contextMenu.add(borderItem);
 		{
 			JMenuItem blackItem = new JMenuItem(rb.getString(PatchAnimBundle.BLACK));
 			blackItem.addActionListener(new ActionListener() {
@@ -284,7 +295,7 @@ public class JPatchSamplePanel extends JPanel {
 				deltaAllPts(10.0);
 			}
 		});		
-		menu.add(lightenPatch);
+		contextMenu.add(lightenPatch);
 
 		JMenuItem darkenPatch = new JMenuItem(rb.getString(PatchAnimBundle.DARKENPATCH));
 		darkenPatch.addActionListener(new ActionListener() {
@@ -292,7 +303,7 @@ public class JPatchSamplePanel extends JPanel {
 				deltaAllPts(-10.0);
 			}
 		});
-		menu.add(darkenPatch);
+		contextMenu.add(darkenPatch);
 		
 		JMenu linearGradient = new JMenu(rb.getString(PatchAnimBundle.LINEARGRADIENT));
 		JMenuItem leftToRight = new JMenuItem(rb.getString(PatchAnimBundle.LEFTTORIGHT));
@@ -327,7 +338,7 @@ public class JPatchSamplePanel extends JPanel {
 		linearGradient.add(topToBottom);
 		linearGradient.add(rightToLeft);
 		linearGradient.add(bottomToTop);
-		menu.add(linearGradient);
+		contextMenu.add(linearGradient);
 		
 		JMenu radialGradient = new JMenu(rb.getString(PatchAnimBundle.RADIALGRADIENT));
 		JMenuItem outward = new JMenuItem(rb.getString(PatchAnimBundle.OUTWARD));
@@ -346,7 +357,7 @@ public class JPatchSamplePanel extends JPanel {
 		
 		radialGradient.add(outward);
 		radialGradient.add(inward);
-		menu.add(radialGradient);
+		contextMenu.add(radialGradient);
 		
 		JMenu shapeGradient = new JMenu(rb.getString(PatchAnimBundle.SHAPEGRADIENT));
 		JMenuItem outwardSh = new JMenuItem(rb.getString(PatchAnimBundle.OUTWARD));
@@ -365,7 +376,7 @@ public class JPatchSamplePanel extends JPanel {
 		
 		shapeGradient.add(outwardSh);
 		shapeGradient.add(inwardSh);
-		menu.add(shapeGradient);
+		contextMenu.add(shapeGradient);
 		
 		JMenu shift = new JMenu(rb.getString(PatchAnimBundle.SHIFT));
 		JMenuItem left = new JMenuItem(rb.getString(PatchAnimBundle.LEFT));
@@ -400,7 +411,7 @@ public class JPatchSamplePanel extends JPanel {
 		shift.add(down);
 		shift.add(right);
 		shift.add(up);
-		menu.add(shift);
+		contextMenu.add(shift);
 
 		JMenuItem invert = new JMenuItem(rb.getString(PatchAnimBundle.INVERT));
 		invert.addActionListener(new ActionListener() {
@@ -408,9 +419,9 @@ public class JPatchSamplePanel extends JPanel {
 				invertPatch();
 			}
 		});
-		menu.add(invert);
+		contextMenu.add(invert);
 		
-		JMenu copy = new JMenu(rb.getString(PatchAnimBundle.COPYPATCHFROM));
+		copyPatchMenu = new JMenu(rb.getString(PatchAnimBundle.COPYPATCHFROM));
 		if (color != PatchColor.Red) {
 			JMenuItem copyRed = new JMenuItem(rb.getString(PatchAnimBundle.REDPATCH));
 			copyRed.addActionListener(new ActionListener() {
@@ -418,7 +429,7 @@ public class JPatchSamplePanel extends JPanel {
 					copyPatch(PatchColor.Red);
 				}
 			});
-			copy.add(copyRed);
+			copyPatchMenu.add(copyRed);
 		}
 		if (color != PatchColor.Green) {
 			JMenuItem copyGreen = new JMenuItem(rb.getString(PatchAnimBundle.GREENPATCH));
@@ -427,7 +438,7 @@ public class JPatchSamplePanel extends JPanel {
 					copyPatch(PatchColor.Green);
 				}
 			});
-			copy.add(copyGreen);
+			copyPatchMenu.add(copyGreen);
 		}
 		if (color != PatchColor.Blue) {
 			JMenuItem copyBlue = new JMenuItem(rb.getString(PatchAnimBundle.BLUEPATCH));
@@ -436,12 +447,19 @@ public class JPatchSamplePanel extends JPanel {
 					copyPatch(PatchColor.Blue);
 				}
 			});
-			copy.add(copyBlue);
+			copyPatchMenu.add(copyBlue);
+		}
+		if (color != PatchColor.Alpha) {
+          JMenuItem copyAlpha = new JMenuItem(rb.getString(PatchAnimBundle.ALPHAPATCH));
+            copyAlpha.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    copyPatch(PatchColor.Alpha);
+                }
+            });
+            copyPatchMenu.add(copyAlpha);
 		}
 		
-		menu.add(copy);
-		
-		menu.show(JPatchSamplePanel.this, me.getX(), me.getY());
+		contextMenu.add(copyPatchMenu);
 	}
 	
 	private void invertPatch() {

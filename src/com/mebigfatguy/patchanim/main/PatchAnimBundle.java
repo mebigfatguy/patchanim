@@ -108,6 +108,7 @@ public class PatchAnimBundle {
 	public static final String REDPATCH = "patchanim.redpatch";
 	public static final String GREENPATCH = "patchanim.greenpatch";
 	public static final String BLUEPATCH = "patchanim.bluepatch";
+	public static final String ALPHAPATCH = "patchanim.alphapatch";
 	public static final String ASKSAVE = "patchanim.asksave";
 	public static final String LOADFAILED = "patchanim.err.loadfailed";	
 	public static final String SAVEFAILED = "patchanim.err.savefailed";

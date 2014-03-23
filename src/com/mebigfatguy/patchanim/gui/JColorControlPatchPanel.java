@@ -65,6 +65,10 @@ public class JColorControlPatchPanel extends JPanel implements PatchDecorator {
 		initListeners();
 	}
 	
+	public void useAlpha(boolean useAlpha) {
+	    sample.useAlpha(useAlpha);
+	}
+	
 	private void initComponents() {
 		ResourceBundle rb = PatchAnimBundle.getBundle();
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
