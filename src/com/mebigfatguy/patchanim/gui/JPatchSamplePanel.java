@@ -289,6 +289,72 @@ public class JPatchSamplePanel extends JPanel {
 			borderItem.add(valueItem);	
 		}
 		
+		JMenuItem setRowItem = new JMenu(rb.getString(PatchAnimBundle.SETROWPOINTS));
+		contextMenu.add(setRowItem);
+        {
+            JMenuItem blackItem = new JMenuItem(rb.getString(PatchAnimBundle.BLACK));
+            blackItem.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    setRowPts(0.0);
+                }
+            });
+            setRowItem.add(blackItem);
+            
+            JMenuItem fullColorItem = new JMenuItem(rb.getString(PatchAnimBundle.FULLCOLOR));
+            fullColorItem.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    setRowPts(255.0);
+                }
+            });
+            setRowItem.add(fullColorItem);
+            
+            JMenuItem valueItem = new JMenuItem(rb.getString(PatchAnimBundle.VALUE));
+            valueItem.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    String value = JOptionPane.showInputDialog(JPatchSamplePanel.this, rb.getString(PatchAnimBundle.VALUE), "128");
+                    try {
+                        if (value != null)
+                            setRowPts(Double.parseDouble(value));
+                    } catch (NumberFormatException nfe) {
+                    }
+                }
+            });
+            setRowItem.add(valueItem);  
+        }
+		
+	    JMenuItem setColumnItem = new JMenu(rb.getString(PatchAnimBundle.SETCOLUMNPOINTS));
+	    contextMenu.add(setColumnItem);
+        {
+            JMenuItem blackItem = new JMenuItem(rb.getString(PatchAnimBundle.BLACK));
+            blackItem.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    setColumnPts(0.0);
+                }
+            });
+            setColumnItem.add(blackItem);
+            
+            JMenuItem fullColorItem = new JMenuItem(rb.getString(PatchAnimBundle.FULLCOLOR));
+            fullColorItem.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    setColumnPts(255.0);
+                }
+            });
+            setColumnItem.add(fullColorItem);
+            
+            JMenuItem valueItem = new JMenuItem(rb.getString(PatchAnimBundle.VALUE));
+            valueItem.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    String value = JOptionPane.showInputDialog(JPatchSamplePanel.this, rb.getString(PatchAnimBundle.VALUE), "128");
+                    try {
+                        if (value != null)
+                            setColumnPts(Double.parseDouble(value));
+                    } catch (NumberFormatException nfe) {
+                    }
+                }
+            });
+            setColumnItem.add(valueItem);  
+        }
+	      
 		JMenuItem lightenPatch = new JMenuItem(rb.getString(PatchAnimBundle.LIGHTENPATCH));
 		lightenPatch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
@@ -545,6 +611,34 @@ public class JPatchSamplePanel extends JPanel {
 			coords.setCoordinate(order-1, k, c);
 		}
 		mediator.setNewActivePatch(patch);
+	}
+	
+	private void setRowPts(double d) {
+	    PatchPanelMediator mediator = PatchPanelMediator.getMediator();
+        CombinedPatch patch = mediator.getActivePatch();
+        PatchCoords coords = patch.getPatch(color);
+        int order = coords.getOrder();
+        int row = decorator.getSelectedCoordinate().y;
+        for (int k = 0; k < order; k++) {
+            Coordinate c = coords.getCoordinate(k, row);
+            c.setColor(d);
+            coords.setCoordinate(k, row, c);
+        }
+        mediator.setNewActivePatch(patch);
+	}
+	
+	private void setColumnPts(double d) {
+        PatchPanelMediator mediator = PatchPanelMediator.getMediator();
+        CombinedPatch patch = mediator.getActivePatch();
+        PatchCoords coords = patch.getPatch(color);
+        int order = coords.getOrder();
+        int col = decorator.getSelectedCoordinate().x;
+        for (int k = 0; k < order; k++) {
+            Coordinate c = coords.getCoordinate(col, k);
+            c.setColor(d);
+            coords.setCoordinate(col, k, c);
+        }
+        mediator.setNewActivePatch(patch);
 	}
 	
 	private void linearGradient(BlendDirection direction) {

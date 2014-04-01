@@ -28,4 +28,6 @@ public interface PatchDecorator {
 	boolean press(Point p, Rectangle bounds);
 	
 	boolean drag(Point p, Rectangle bounds);
+	
+	Point getSelectedCoordinate();
 }

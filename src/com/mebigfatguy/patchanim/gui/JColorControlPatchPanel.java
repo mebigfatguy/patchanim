@@ -69,7 +69,12 @@ public class JColorControlPatchPanel extends JPanel implements PatchDecorator {
 	    sample.useAlpha(useAlpha);
 	}
 	
-	private void initComponents() {
+	@Override
+    public Point getSelectedCoordinate() {
+        return new Point(selectedXPt, selectedYPt);
+    }
+
+    private void initComponents() {
 		ResourceBundle rb = PatchAnimBundle.getBundle();
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		sample = new JPatchSamplePanel(color);

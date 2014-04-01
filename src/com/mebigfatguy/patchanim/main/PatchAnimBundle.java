@@ -84,6 +84,8 @@ public class PatchAnimBundle {
 	public static final String COLOR = "patchanim.color";
 	public static final String SETALLPOINTS = "patchanim.setallpoints";
 	public static final String SETBORDERPOINTS = "patchanim.setborderpoints";
+	public static final String SETROWPOINTS = "patchanim.setrowpoints";
+	public static final String SETCOLUMNPOINTS = "patchanim.setcolumnpoints";
 	public static final String BLACK = "patchanim.black";
 	public static final String FULLCOLOR="patchanim.fullcolor";
 	public static final String VALUE="patchanim.value";
