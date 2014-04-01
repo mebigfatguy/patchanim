@@ -105,6 +105,7 @@ public class PatchExporter implements PatchCompletionListener {
 					mngEncoder.setRepeat(atype != AnimationType.None);
 					mngEncoder.setNumFrames(totalImages);
 					mngEncoder.setDelay(100);
+				break;
 			}
 
 			
@@ -117,12 +118,21 @@ public class PatchExporter implements PatchCompletionListener {
 				JOptionPane.showMessageDialog(null, rb.getString(PatchAnimBundle.EXPORTFAILED));
 			}
 		} finally {
-			if (type == ExportType.AnimatedGif) {
-				agEncoder.finish();
-			} else if (type == ExportType.AnimatedPng) {
-				apngEncoder.finish();
-			} else if (type == ExportType.AnimatedMng) {
-				mngEncoder.finish();
+		    switch (type) {
+    		    case AnimatedGif:
+    				agEncoder.finish();
+    				break;
+    				
+    		    case AnimatedPng:
+    				apngEncoder.finish();
+    				break;
+    				
+    		    case AnimatedMng:
+    				mngEncoder.finish();
+    				break;
+    				
+    			default:
+    			    break;
 			}
 		}
 	}
