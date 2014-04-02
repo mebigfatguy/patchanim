@@ -245,12 +245,11 @@ public class JPatchSamplePanel extends JPanel {
 			JMenuItem valueItem = new JMenuItem(rb.getString(PatchAnimBundle.VALUE));
 			valueItem.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent ae) {
-					String value = JOptionPane.showInputDialog(JPatchSamplePanel.this, rb.getString(PatchAnimBundle.VALUE), "128");
-					try {
-						if (value != null)
-							setAllPts(Double.parseDouble(value));
-					} catch (NumberFormatException nfe) {
-					}
+				    SelectValueDialog d = new SelectValueDialog(JPatchSamplePanel.this);
+				    Double value = d.getValue();
+
+					if (value != null)
+						setAllPts(value.doubleValue());
 				}
 			});
 			setAllItem.add(valueItem);	
@@ -278,12 +277,11 @@ public class JPatchSamplePanel extends JPanel {
 			JMenuItem valueItem = new JMenuItem(rb.getString(PatchAnimBundle.VALUE));
 			valueItem.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent ae) {
-					String value = JOptionPane.showInputDialog(JPatchSamplePanel.this, rb.getString(PatchAnimBundle.VALUE), "128");
-					try {
-						if (value != null)
-							setAllBorderPts(Double.parseDouble(value));
-					} catch (NumberFormatException nfe) {
-					}
+				    SelectValueDialog d = new SelectValueDialog(JPatchSamplePanel.this);
+                    Double value = d.getValue();
+
+                    if (value != null)
+                        setAllBorderPts(value.doubleValue());
 				}
 			});
 			borderItem.add(valueItem);	
@@ -311,12 +309,11 @@ public class JPatchSamplePanel extends JPanel {
             JMenuItem valueItem = new JMenuItem(rb.getString(PatchAnimBundle.VALUE));
             valueItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent ae) {
-                    String value = JOptionPane.showInputDialog(JPatchSamplePanel.this, rb.getString(PatchAnimBundle.VALUE), "128");
-                    try {
-                        if (value != null)
-                            setRowPts(Double.parseDouble(value));
-                    } catch (NumberFormatException nfe) {
-                    }
+                    SelectValueDialog d = new SelectValueDialog(JPatchSamplePanel.this);
+                    Double value = d.getValue();
+
+                    if (value != null)
+                        setRowPts(value.doubleValue());
                 }
             });
             setRowItem.add(valueItem);  
@@ -344,12 +341,11 @@ public class JPatchSamplePanel extends JPanel {
             JMenuItem valueItem = new JMenuItem(rb.getString(PatchAnimBundle.VALUE));
             valueItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent ae) {
-                    String value = JOptionPane.showInputDialog(JPatchSamplePanel.this, rb.getString(PatchAnimBundle.VALUE), "128");
-                    try {
-                        if (value != null)
-                            setColumnPts(Double.parseDouble(value));
-                    } catch (NumberFormatException nfe) {
-                    }
+                    SelectValueDialog d = new SelectValueDialog(JPatchSamplePanel.this);
+                    Double value = d.getValue();
+
+                    if (value != null)
+                        setColumnPts(value.doubleValue());
                 }
             });
             setColumnItem.add(valueItem);  

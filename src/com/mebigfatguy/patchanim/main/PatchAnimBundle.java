@@ -88,6 +88,7 @@ public class PatchAnimBundle {
 	public static final String SETCOLUMNPOINTS = "patchanim.setcolumnpoints";
 	public static final String BLACK = "patchanim.black";
 	public static final String FULLCOLOR="patchanim.fullcolor";
+	public static final String SELECTVALUE = "patchanim.selectvalue";
 	public static final String VALUE="patchanim.value";
 	public static final String LIGHTENPATCH = "patchanim.lightenpatch";
 	public static final String DARKENPATCH = "patchanim.darkenpatch";
