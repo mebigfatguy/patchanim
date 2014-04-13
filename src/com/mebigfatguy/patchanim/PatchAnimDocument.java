@@ -44,6 +44,9 @@ public class PatchAnimDocument implements Serializable {
 	
 	/**
 	 * constructs a new document for the New menu item
+	 * 
+	 * @param patchOrder the order of the patch (number of control points)
+	 * @param alpha whether to use alpha blending or not
 	 */
 	public PatchAnimDocument(int patchOrder, boolean alpha) {
 		order = patchOrder;
