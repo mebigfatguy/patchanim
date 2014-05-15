@@ -662,6 +662,10 @@ public class JPatchSamplePanel extends JPanel {
 					case BottomToTop:
 						clr = (255.0 * (order - 1 - j)) / (order - 1);
 					break;
+					
+					default:
+						clr = 0.0;
+					break;
 				}
 				
 				c.setColor(clr);
@@ -691,6 +695,10 @@ public class JPatchSamplePanel extends JPanel {
 					case Inward:
 						clr = (int)(255.0 - (255.0 * (Math.abs(i - midOrder) * Math.abs(j - midOrder))) / midOrderSq);
 					break;
+					
+					default:
+						clr = 0.0;
+					break;
 				}
 				
 				c.setColor(clr);
@@ -719,6 +727,10 @@ public class JPatchSamplePanel extends JPanel {
 						
 					case Inward:
 						clr = (int)(255.0 - (255.0 * (outside / midOrder)));
+					break;
+					
+					default:
+						clr = 0.0;
 					break;
 				}
 				
