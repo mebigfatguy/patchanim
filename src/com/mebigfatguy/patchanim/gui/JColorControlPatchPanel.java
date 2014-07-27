@@ -108,6 +108,7 @@ public class JColorControlPatchPanel extends JPanel implements PatchDecorator {
 	private void initListeners() {
 		final PatchPanelMediator mediator = PatchPanelMediator.getMediator();
 		mediator.addActivePatchChangedListener(new ActivePatchChangedListener() {
+			@Override
 			public void activePatchChanged(ActivePatchChangedEvent apce) {
 				if ((color != PatchColor.Alpha) || mediator.getDocument().useAlpha()) {
 					CombinedPatch currentPatch = apce.getActivePatch();
@@ -125,6 +126,7 @@ public class JColorControlPatchPanel extends JPanel implements PatchDecorator {
 	private void setColorField(final boolean fireEvents) {
 		
 		SwingUtilities.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				Coordinate coord = coords.getCoordinate(selectedXPt, selectedYPt);
 				double newColor = coord.getColor();
@@ -145,6 +147,7 @@ public class JColorControlPatchPanel extends JPanel implements PatchDecorator {
 		});
 	}
 	
+	@Override
 	public void drawDecoration(Graphics2D g, Rectangle bounds) {
 		if (coords == null)
 			return;
@@ -169,11 +172,13 @@ public class JColorControlPatchPanel extends JPanel implements PatchDecorator {
 		}
 	}
 	
+	@Override
 	public boolean press(Point p, Rectangle bounds) {
 
 		if (setSelectedControlPt(p, bounds)) {
 			setColorField(false);
 			SwingUtilities.invokeLater(new Runnable() {
+				@Override
 				public void run() {
 					colorField.requestFocusInWindow();
 					colorField.setSelectionStart(0);
@@ -188,6 +193,7 @@ public class JColorControlPatchPanel extends JPanel implements PatchDecorator {
 		return false;
 	}
 	
+	@Override
 	public boolean drag(Point p, Rectangle bounds) {
 		double inputX = ((p.x - bounds.x) * 100.0) / bounds.width;
 		double inputY = ((p.y - bounds.y) * 100.0) / bounds.height;
@@ -248,14 +254,17 @@ public class JColorControlPatchPanel extends JPanel implements PatchDecorator {
 	
 	class ValueDocumentListener implements DocumentListener
 	{
+		@Override
 		public void changedUpdate(DocumentEvent de) {
 			processChange();
 		}
 	
+		@Override
 		public void insertUpdate(DocumentEvent de) {
 			processChange();
 		}
 	
+		@Override
 		public void removeUpdate(DocumentEvent de) {
 			processChange();
 		}

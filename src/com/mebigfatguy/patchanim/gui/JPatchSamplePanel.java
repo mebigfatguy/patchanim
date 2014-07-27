@@ -141,6 +141,7 @@ public class JPatchSamplePanel extends JPanel {
 		
 		PatchPanelMediator mediator = PatchPanelMediator.getMediator();
 		mediator.addActivePatchChangedListener(new ActivePatchChangedListener() {
+			@Override
 			public void activePatchChanged(ActivePatchChangedEvent apce) {
 				if (color == PatchColor.Combined) {
 					CombinedPatch currentPatch = apce.getActivePatch();
@@ -149,6 +150,7 @@ public class JPatchSamplePanel extends JPanel {
 			}
 		});
 		mediator.addDocumentChangedListener(new DocumentChangedListener() {
+			@Override
 			public void documentChanged(DocumentChangedEvent dce) {
 				PatchAnimDocument doc = dce.getDocument();
 				image = PatchGenerator.buildImage(rgb, doc.useAlpha(), SAMPLE_SIZE, SAMPLE_SIZE);
@@ -159,6 +161,7 @@ public class JPatchSamplePanel extends JPanel {
 			}
 		});
 		mediator.addSettingsChangedListener(new SettingsChangedListener() {
+			@Override
 			public void settingsChanged(SettingsChangedEvent sce) {
 				oob = sce.getDocument().getOutOfBoundsColor();
 				PatchPanelMediator ppMediator = PatchPanelMediator.getMediator();
@@ -182,6 +185,7 @@ public class JPatchSamplePanel extends JPanel {
 		}
 		
 		redrawThread = new Thread(new Runnable() {
+			@Override
 			public void run() {
 				if (oob == null)
 					oob = OutOfBoundsColor.Clip;
@@ -204,6 +208,7 @@ public class JPatchSamplePanel extends JPanel {
 	private void redraw() {
 		try {
 			SwingUtilities.invokeLater(new Runnable() {
+				@Override
 				public void run() {
 					invalidate();
 					revalidate();
@@ -227,6 +232,7 @@ public class JPatchSamplePanel extends JPanel {
 		{
 			JMenuItem blackItem = new JMenuItem(rb.getString(PatchAnimBundle.BLACK));
 			blackItem.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent ae) {
 					setAllPts(0.0);
 				}
@@ -235,6 +241,7 @@ public class JPatchSamplePanel extends JPanel {
 			
 			JMenuItem fullColorItem = new JMenuItem(rb.getString(PatchAnimBundle.FULLCOLOR));
 			fullColorItem.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent ae) {
 					setAllPts(255.0);
 				}
@@ -243,6 +250,7 @@ public class JPatchSamplePanel extends JPanel {
 			
 			JMenuItem valueItem = new JMenuItem(rb.getString(PatchAnimBundle.VALUE));
 			valueItem.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent ae) {
 				    SelectValueDialog d = new SelectValueDialog(JPatchSamplePanel.this);
 				    Double value = d.getValue();
@@ -259,6 +267,7 @@ public class JPatchSamplePanel extends JPanel {
 		{
 			JMenuItem blackItem = new JMenuItem(rb.getString(PatchAnimBundle.BLACK));
 			blackItem.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent ae) {
 					setAllBorderPts(0.0);
 				}
@@ -267,6 +276,7 @@ public class JPatchSamplePanel extends JPanel {
 			
 			JMenuItem fullColorItem = new JMenuItem(rb.getString(PatchAnimBundle.FULLCOLOR));
 			fullColorItem.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent ae) {
 					setAllBorderPts(255.0);
 				}
@@ -275,6 +285,7 @@ public class JPatchSamplePanel extends JPanel {
 			
 			JMenuItem valueItem = new JMenuItem(rb.getString(PatchAnimBundle.VALUE));
 			valueItem.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent ae) {
 				    SelectValueDialog d = new SelectValueDialog(JPatchSamplePanel.this);
                     Double value = d.getValue();
@@ -291,7 +302,8 @@ public class JPatchSamplePanel extends JPanel {
         {
             JMenuItem blackItem = new JMenuItem(rb.getString(PatchAnimBundle.BLACK));
             blackItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent ae) {
+            	@Override
+            	public void actionPerformed(ActionEvent ae) {
                     setRowPts(0.0);
                 }
             });
@@ -299,7 +311,8 @@ public class JPatchSamplePanel extends JPanel {
             
             JMenuItem fullColorItem = new JMenuItem(rb.getString(PatchAnimBundle.FULLCOLOR));
             fullColorItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent ae) {
+            	@Override
+            	public void actionPerformed(ActionEvent ae) {
                     setRowPts(255.0);
                 }
             });
@@ -307,7 +320,8 @@ public class JPatchSamplePanel extends JPanel {
             
             JMenuItem valueItem = new JMenuItem(rb.getString(PatchAnimBundle.VALUE));
             valueItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent ae) {
+            	@Override
+            	public void actionPerformed(ActionEvent ae) {
                     SelectValueDialog d = new SelectValueDialog(JPatchSamplePanel.this);
                     Double value = d.getValue();
 
@@ -323,7 +337,8 @@ public class JPatchSamplePanel extends JPanel {
         {
             JMenuItem blackItem = new JMenuItem(rb.getString(PatchAnimBundle.BLACK));
             blackItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent ae) {
+            	@Override
+            	public void actionPerformed(ActionEvent ae) {
                     setColumnPts(0.0);
                 }
             });
@@ -331,7 +346,8 @@ public class JPatchSamplePanel extends JPanel {
             
             JMenuItem fullColorItem = new JMenuItem(rb.getString(PatchAnimBundle.FULLCOLOR));
             fullColorItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent ae) {
+            	@Override
+            	public void actionPerformed(ActionEvent ae) {
                     setColumnPts(255.0);
                 }
             });
@@ -339,7 +355,8 @@ public class JPatchSamplePanel extends JPanel {
             
             JMenuItem valueItem = new JMenuItem(rb.getString(PatchAnimBundle.VALUE));
             valueItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent ae) {
+            	@Override
+            	public void actionPerformed(ActionEvent ae) {
                     SelectValueDialog d = new SelectValueDialog(JPatchSamplePanel.this);
                     Double value = d.getValue();
 
@@ -352,6 +369,7 @@ public class JPatchSamplePanel extends JPanel {
 	      
 		JMenuItem lightenPatch = new JMenuItem(rb.getString(PatchAnimBundle.LIGHTENPATCH));
 		lightenPatch.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				deltaAllPts(10.0);
 			}
@@ -360,6 +378,7 @@ public class JPatchSamplePanel extends JPanel {
 
 		JMenuItem darkenPatch = new JMenuItem(rb.getString(PatchAnimBundle.DARKENPATCH));
 		darkenPatch.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				deltaAllPts(-10.0);
 			}
@@ -369,6 +388,7 @@ public class JPatchSamplePanel extends JPanel {
 		JMenu linearGradient = new JMenu(rb.getString(PatchAnimBundle.LINEARGRADIENT));
 		JMenuItem leftToRight = new JMenuItem(rb.getString(PatchAnimBundle.LEFTTORIGHT));
 		leftToRight.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				linearGradient(BlendDirection.LeftToRight);
 			}
@@ -376,6 +396,7 @@ public class JPatchSamplePanel extends JPanel {
 		
 		JMenuItem topToBottom = new JMenuItem(rb.getString(PatchAnimBundle.TOPTOBOTTOM));
 		topToBottom.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				linearGradient(BlendDirection.TopToBottom);
 			}
@@ -383,6 +404,7 @@ public class JPatchSamplePanel extends JPanel {
 		
 		JMenuItem rightToLeft = new JMenuItem(rb.getString(PatchAnimBundle.RIGHTTOLEFT));
 		rightToLeft.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				linearGradient(BlendDirection.RightToLeft);
 			}
@@ -390,6 +412,7 @@ public class JPatchSamplePanel extends JPanel {
 
 		JMenuItem bottomToTop = new JMenuItem(rb.getString(PatchAnimBundle.BOTTOMTOTOP));
 		bottomToTop.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				linearGradient(BlendDirection.BottomToTop);
 			}
@@ -404,6 +427,7 @@ public class JPatchSamplePanel extends JPanel {
 		JMenu radialGradient = new JMenu(rb.getString(PatchAnimBundle.RADIALGRADIENT));
 		JMenuItem outward = new JMenuItem(rb.getString(PatchAnimBundle.OUTWARD));
 		outward.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				radialGradient(BlendDirection.Outward);
 			}
@@ -411,6 +435,7 @@ public class JPatchSamplePanel extends JPanel {
 		
 		JMenuItem inward = new JMenuItem(rb.getString(PatchAnimBundle.INWARD));
 		inward.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				radialGradient(BlendDirection.Inward);
 			}
@@ -423,6 +448,7 @@ public class JPatchSamplePanel extends JPanel {
 		JMenu shapeGradient = new JMenu(rb.getString(PatchAnimBundle.SHAPEGRADIENT));
 		JMenuItem outwardSh = new JMenuItem(rb.getString(PatchAnimBundle.OUTWARD));
 		outwardSh.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				shapeGradient(BlendDirection.Outward);
 			}
@@ -430,6 +456,7 @@ public class JPatchSamplePanel extends JPanel {
 		
 		JMenuItem inwardSh = new JMenuItem(rb.getString(PatchAnimBundle.INWARD));
 		inwardSh.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				shapeGradient(BlendDirection.Inward);
 			}
@@ -442,6 +469,7 @@ public class JPatchSamplePanel extends JPanel {
 		JMenu shift = new JMenu(rb.getString(PatchAnimBundle.SHIFT));
 		JMenuItem left = new JMenuItem(rb.getString(PatchAnimBundle.LEFT));
 		left.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				shiftPatch(ShiftDirection.Left);
 			}
@@ -449,6 +477,7 @@ public class JPatchSamplePanel extends JPanel {
 
 		JMenuItem down = new JMenuItem(rb.getString(PatchAnimBundle.DOWN));
 		down.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				shiftPatch(ShiftDirection.Down);
 			}
@@ -456,6 +485,7 @@ public class JPatchSamplePanel extends JPanel {
 
 		JMenuItem right = new JMenuItem(rb.getString(PatchAnimBundle.RIGHT));
 		right.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				shiftPatch(ShiftDirection.Right);
 			}
@@ -463,6 +493,7 @@ public class JPatchSamplePanel extends JPanel {
 
 		JMenuItem up = new JMenuItem(rb.getString(PatchAnimBundle.UP));
 		up.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				shiftPatch(ShiftDirection.Up);
 			}
@@ -476,6 +507,7 @@ public class JPatchSamplePanel extends JPanel {
 
 		JMenuItem invert = new JMenuItem(rb.getString(PatchAnimBundle.INVERT));
 		invert.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				invertPatch();
 			}
@@ -486,6 +518,7 @@ public class JPatchSamplePanel extends JPanel {
 		if (color != PatchColor.Red) {
 			JMenuItem copyRed = new JMenuItem(rb.getString(PatchAnimBundle.REDPATCH));
 			copyRed.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent ae) {
 					copyPatch(PatchColor.Red);
 				}
@@ -495,6 +528,7 @@ public class JPatchSamplePanel extends JPanel {
 		if (color != PatchColor.Green) {
 			JMenuItem copyGreen = new JMenuItem(rb.getString(PatchAnimBundle.GREENPATCH));
 			copyGreen.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent ae) {
 					copyPatch(PatchColor.Green);
 				}
@@ -504,6 +538,7 @@ public class JPatchSamplePanel extends JPanel {
 		if (color != PatchColor.Blue) {
 			JMenuItem copyBlue = new JMenuItem(rb.getString(PatchAnimBundle.BLUEPATCH));
 			copyBlue.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent ae) {
 					copyPatch(PatchColor.Blue);
 				}
@@ -513,7 +548,8 @@ public class JPatchSamplePanel extends JPanel {
 		if (color != PatchColor.Alpha) {
           JMenuItem copyAlpha = new JMenuItem(rb.getString(PatchAnimBundle.ALPHAPATCH));
             copyAlpha.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent ae) {
+            	@Override
+            	public void actionPerformed(ActionEvent ae) {
                     copyPatch(PatchColor.Alpha);
                 }
             });

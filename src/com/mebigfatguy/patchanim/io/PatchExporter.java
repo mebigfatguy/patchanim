@@ -43,7 +43,7 @@ import com.mebigfatguy.patchanim.main.PatchAnimBundle;
 import com.mebigfatguy.patchanim.surface.PatchAnimator;
 
 public class PatchExporter implements PatchCompletionListener {
-	private ExportType type;
+	private final ExportType type;
 	private File loc;
 	private AnimatedGifEncoder agEncoder;
 	private APngEncoder apngEncoder;
@@ -51,7 +51,7 @@ public class PatchExporter implements PatchCompletionListener {
 	private int totalImages;
 	private int imageIndex;
 	private String baseName;
-	private Set<ExportListener> elisteners = new HashSet<ExportListener>();
+	private final Set<ExportListener> elisteners = new HashSet<ExportListener>();
 	
 	public PatchExporter(ExportType exportType, File location) {
 		type = exportType;
@@ -137,6 +137,7 @@ public class PatchExporter implements PatchCompletionListener {
 		}
 	}
 
+	@Override
 	public void patchCompleted(PatchCompletionEvent pce) throws InterruptedException {
 		try {
 			writeSingleFile(pce.getImage(), imageIndex++, loc, baseName, type);

@@ -29,7 +29,7 @@ public class PatchListModel extends AbstractListModel {
 
 	private static final long serialVersionUID = -4980398874234658317L;
 	
-	private PatchAnimDocument doc;
+	private final PatchAnimDocument doc;
 	
 	public PatchListModel() {
 		doc = null;
@@ -59,6 +59,7 @@ public class PatchListModel extends AbstractListModel {
 		fireIntervalRemoved(this, pos, pos);	
 	}
 	
+	@Override
 	public Object getElementAt(int index) {
 		if (doc == null)
 			return null;
@@ -67,6 +68,7 @@ public class PatchListModel extends AbstractListModel {
 		return patches.get(index);
 	}
 
+	@Override
 	public int getSize() {
 		if (doc == null)
 			return 0;

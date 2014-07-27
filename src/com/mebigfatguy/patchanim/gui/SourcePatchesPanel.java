@@ -49,6 +49,7 @@ public class SourcePatchesPanel extends JPanel {
 		
 		PatchPanelMediator mediator = PatchPanelMediator.getMediator();
 		mediator.addDocumentChangedListener(new DocumentChangedListener() {
+			@Override
 			public void documentChanged(DocumentChangedEvent dce) {
 			    boolean useAlpha = dce.getDocument().useAlpha();
 				rebuild(useAlpha);
@@ -61,6 +62,7 @@ public class SourcePatchesPanel extends JPanel {
 	
 	public final void rebuild(final boolean useAlpha) {
 		SwingUtilities.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				Container c = SourcePatchesPanel.this.getParent();
 				if (c != null)

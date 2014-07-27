@@ -60,6 +60,7 @@ public class JTestFrame extends JFrame implements PatchCompletionListener {
 			return;
 		
 		animThread = new Thread(new Runnable() {
+			@Override
 			public void run() {
 				AnimationType type = document.getAnimationType();
 				do {
@@ -94,6 +95,7 @@ public class JTestFrame extends JFrame implements PatchCompletionListener {
 		}
 	}
 	
+	@Override
 	public void patchCompleted(PatchCompletionEvent pce) throws InterruptedException {
 		long now = System.currentTimeMillis();
 		long sleepTime = 100 - (now - lastRedraw);
@@ -148,6 +150,7 @@ public class JTestFrame extends JFrame implements PatchCompletionListener {
 			try {
 				image = redrawImage;
 				SwingUtilities.invokeAndWait(new Runnable() {
+					@Override
 					public void run() {
 						invalidate();
 						revalidate();

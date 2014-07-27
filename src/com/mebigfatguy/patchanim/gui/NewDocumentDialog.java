@@ -103,6 +103,7 @@ public class NewDocumentDialog extends JDialog {
 	
 	private void initListeners() {
 		ok.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				isOk = true;
 				dispose();
@@ -110,6 +111,7 @@ public class NewDocumentDialog extends JDialog {
 		});
 		
 		cancel.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				isOk = false;
 				dispose();

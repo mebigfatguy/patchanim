@@ -94,10 +94,12 @@ public class PatchAnimExtension {
 	public NodeList getPatches(ExpressionContext context) {
 		return new NodeList() {
 
+			@Override
 			public int getLength() {
 				return paDoc.getPatches().size();
 			}
 
+			@Override
 			public Node item(int index) {
 				return d.createTextNode(String.valueOf(index));
 			}
@@ -112,11 +114,13 @@ public class PatchAnimExtension {
 	public NodeList getCoordinates(ExpressionContext context) {
 		return new NodeList() {
 
+			@Override
 			public int getLength() {
 				int order = paDoc.getOrder();
 				return order * order;
 			}
 
+			@Override
 			public Node item(int index) {
 				return d.createTextNode(String.valueOf(index));
 			}

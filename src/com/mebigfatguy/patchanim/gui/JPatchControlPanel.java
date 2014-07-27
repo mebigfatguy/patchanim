@@ -168,9 +168,11 @@ public class JPatchControlPanel extends JPanel {
 	private void initListeners() {
 		PatchPanelMediator mediator = PatchPanelMediator.getMediator();
 		mediator.addDocumentChangedListener(new DocumentChangedListener() {
+			@Override
 			public void documentChanged(DocumentChangedEvent dce) {
 				document = dce.getDocument();
 				SwingUtilities.invokeLater(new Runnable() {
+					@Override
 					public void run() {
 						widthField.setText(String.valueOf(document.getWidth()));
 						heightField.setText(String.valueOf(document.getHeight()));
@@ -184,7 +186,7 @@ public class JPatchControlPanel extends JPanel {
 		});
 		
 		widthField.addFocusListener(new FocusListener() {
-
+			@Override
 			public void focusLost(FocusEvent fe) {
 				try {
 					int oldWidth = document.getWidth();
@@ -201,6 +203,7 @@ public class JPatchControlPanel extends JPanel {
 				}				
 			}
 			
+			@Override
 			public void focusGained(FocusEvent fe) {
 				widthField.setSelectionStart(0);
 				widthField.setSelectionEnd(Integer.MAX_VALUE);
@@ -209,6 +212,7 @@ public class JPatchControlPanel extends JPanel {
 
 		heightField.addFocusListener(new FocusListener() {
 
+			@Override
 			public void focusLost(FocusEvent arg0) {
 				try {
 					int oldHeight = document.getHeight();
@@ -225,6 +229,7 @@ public class JPatchControlPanel extends JPanel {
 				}
 			}
 			
+			@Override
 			public void focusGained(FocusEvent fe) {
 				heightField.setSelectionStart(0);
 				heightField.setSelectionEnd(Integer.MAX_VALUE);
@@ -253,6 +258,7 @@ public class JPatchControlPanel extends JPanel {
 		
 		animationCB.addItemListener(new ItemListener() {
 			
+			@Override
 			public void itemStateChanged(ItemEvent ie) {
 				if (ie.getStateChange() == ItemEvent.SELECTED) {
 					document.setAnimationType((AnimationType)ie.getItem());
@@ -264,6 +270,7 @@ public class JPatchControlPanel extends JPanel {
 		
 		outOfBoundsColorCB.addItemListener(new ItemListener() {
 
+			@Override
 			public void itemStateChanged(ItemEvent ie) {
 				if (ie.getStateChange() == ItemEvent.SELECTED) {
 					document.setOutOfBoundsColor((OutOfBoundsColor)ie.getItem());
@@ -282,7 +289,7 @@ public class JPatchControlPanel extends JPanel {
 		});
 		
 		tweenStyleCB.addItemListener(new ItemListener() {
-			
+			@Override
 			public void itemStateChanged(ItemEvent ie) {
 				if (ie.getStateChange() == ItemEvent.SELECTED) {
 					document.setTweenStyle((TweenStyle)ie.getItem());
@@ -293,6 +300,7 @@ public class JPatchControlPanel extends JPanel {
 		});
 		
 		testButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				JTestFrame tf = new JTestFrame();
 				tf.setLocationRelativeTo(JPatchControlPanel.this.getRootPane());

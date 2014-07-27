@@ -102,14 +102,16 @@ public class SelectValueDialog extends JDialog {
         getRootPane().setDefaultButton(okButton);
         
         okButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ae) {
+        	@Override
+        	public void actionPerformed(ActionEvent ae) {
                 dispose();
                 ok = true;
             }
         });
         
         cancelButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ae) {
+        	@Override
+        	public void actionPerformed(ActionEvent ae) {
                 dispose();
                 ok = false;
             }

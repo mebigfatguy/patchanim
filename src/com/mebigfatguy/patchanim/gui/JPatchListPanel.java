@@ -110,8 +110,10 @@ public class JPatchListPanel extends JPanel {
 	private void initListeners() {
 		final PatchPanelMediator mediator = PatchPanelMediator.getMediator();
 		mediator.addDocumentChangedListener(new DocumentChangedListener() {
+			@Override
 			public void documentChanged(final DocumentChangedEvent dce) {
 				SwingUtilities.invokeLater(new Runnable() {
+					@Override
 					public void run() {
 						patchListModel = new PatchListModel(dce.getDocument());
 						patchList.setModel(patchListModel);
@@ -126,6 +128,7 @@ public class JPatchListPanel extends JPanel {
 		});
 		
 		addButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				int selIndex = patchList.getSelectedIndex();
 				if (selIndex < 0)
@@ -143,6 +146,7 @@ public class JPatchListPanel extends JPanel {
 		});
 		
 		removeButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				int selIndex = patchList.getSelectedIndex();
 				if (selIndex >= 0) {
@@ -160,6 +164,7 @@ public class JPatchListPanel extends JPanel {
 		});
 		
 		upButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				int selIndex = patchList.getSelectedIndex();
 				if (selIndex > 0) {
@@ -174,6 +179,7 @@ public class JPatchListPanel extends JPanel {
 		});
 		
 		downButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				int selIndex = patchList.getSelectedIndex();
 				if ((selIndex >= 0) && (selIndex < (patchListModel.getSize() - 1))) {
@@ -189,6 +195,7 @@ public class JPatchListPanel extends JPanel {
 
 
 		patchList.addListSelectionListener(new ListSelectionListener() {
+			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting()) {
 					int selIndex = patchList.getSelectedIndex();
@@ -249,6 +256,7 @@ public class JPatchListPanel extends JPanel {
 		JPopupMenu patchMenu = new JPopupMenu();
 		JMenuItem renameItem = new JMenuItem(rb.getString(PatchAnimBundle.RENAME));
 		renameItem.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				CombinedPatch patch = (CombinedPatch)patchList.getSelectedValue();
 				if (patch != null) {
@@ -259,6 +267,7 @@ public class JPatchListPanel extends JPanel {
 		patchMenu.add(renameItem);
 		JMenuItem cloneItem = new JMenuItem(rb.getString(PatchAnimBundle.CLONE));
 		cloneItem.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				int selIndex = patchList.getSelectedIndex();
 				CombinedPatch patch = (CombinedPatch)patchListModel.getElementAt(selIndex);

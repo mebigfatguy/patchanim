@@ -65,8 +65,10 @@ public class ExportFrame extends JDialog implements ExportListener {
 	 * 
 	 * @param ee the export event describing what file number is being exported
 	 */
+	@Override
 	public void imageExported(final ExportEvent ee) {
 		SwingUtilities.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				bar.setMaximum(ee.getTotalImages());
 				bar.setValue(ee.getCurrentImage());

@@ -161,11 +161,13 @@ public class JPatchAnimFrame extends JFrame {
 		
 		addWindowFocusListener(new WindowFocusListener() {
 
+			@Override
 			public void windowGainedFocus(WindowEvent e) {
 				PatchPanelMediator mediator = PatchPanelMediator.getMediator();
 				mediator.setFocused(true);
 			}
 
+			@Override
 			public void windowLostFocus(WindowEvent e) {
 				PatchPanelMediator mediator = PatchPanelMediator.getMediator();
 				mediator.setFocused(false);
@@ -173,6 +175,7 @@ public class JPatchAnimFrame extends JFrame {
 		});
 		
 		newItem.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				ResourceBundle rb = PatchAnimBundle.getBundle();
 				try {
@@ -193,6 +196,7 @@ public class JPatchAnimFrame extends JFrame {
 		});
 		
 		openItem.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				try {
 					if (document.isDirty()) {
@@ -217,6 +221,7 @@ public class JPatchAnimFrame extends JFrame {
 		});
 		
 		saveItem.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				try {
 					if (documentLocation == null) {
@@ -232,6 +237,7 @@ public class JPatchAnimFrame extends JFrame {
 		});
 		
 		saveAsItem.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				try {
 					saveAs();
@@ -243,42 +249,49 @@ public class JPatchAnimFrame extends JFrame {
 		});
 		
 		exportJpgsItem.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				export(ExportType.JPegs);
 			}
 		});
 		
 		exportPngsItem.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				export(ExportType.Pngs);
 			}
 		});
 		
 		exportGifsItem.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				export(ExportType.Gifs);
 			}
 		});
 		
 		exportAnimatedGifItem.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				export(ExportType.AnimatedGif);
 			}
 		});
 		
 		exportAnimatedPngItem.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				export(ExportType.AnimatedPng);
 			}
 		});
 		
 		exportAnimatedMngItem.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				export(ExportType.AnimatedMng);
 			}
 		});
 		
 		quitItem.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				try {
 					if (document.isDirty()) {
@@ -300,6 +313,7 @@ public class JPatchAnimFrame extends JFrame {
 		
 		PatchPanelMediator mediator = PatchPanelMediator.getMediator();
 		mediator.addActivePatchChangedListener(new ActivePatchChangedListener () {
+			@Override
 			public void activePatchChanged(ActivePatchChangedEvent apce) {
 				document.setDirty(true);
 				saveItem.setEnabled(true);
@@ -307,6 +321,7 @@ public class JPatchAnimFrame extends JFrame {
 		});
 		
 		mediator.addSettingsChangedListener(new SettingsChangedListener() {
+			@Override
 			public void settingsChanged(SettingsChangedEvent sce) {
 				document.setDirty(true);
 				saveItem.setEnabled(true);
@@ -438,11 +453,13 @@ public class JPatchAnimFrame extends JFrame {
 				ed.setLocationRelativeTo(JPatchAnimFrame.this);
 				ed.setVisible(true);
 				Thread t = new Thread(new Runnable() {
+					@Override
 					public void run() {
 						try {
 							exporter.addExportListener(ed);
 							exporter.export(document);
 							SwingUtilities.invokeLater(new Runnable() {
+								@Override
 								public void run() {
 									ed.dispose();								
 								}
