@@ -33,9 +33,9 @@ public class Coordinate implements Serializable, Cloneable {
 	}
 	
 	@Override
-	public Object clone() {
+	public Coordinate clone() {
 		try {
-			return super.clone();
+			return (Coordinate) super.clone();
 		} catch (CloneNotSupportedException cnse) {
 			return new Coordinate(0.0, 0.0, 0.0);
 		}

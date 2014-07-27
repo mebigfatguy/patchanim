@@ -58,12 +58,12 @@ public class CombinedPatch implements Serializable, Cloneable {
 	}
 	
 	@Override
-	public Object clone() {
+	public CombinedPatch clone() {
 		try {
 			CombinedPatch clonedPatch = (CombinedPatch)super.clone();
 			clonedPatch.patches = new EnumMap<PatchColor, PatchCoords>(PatchColor.class);
 			for (Map.Entry<PatchColor, PatchCoords> entry : patches.entrySet()) {
-				clonedPatch.patches.put(entry.getKey(), (PatchCoords)entry.getValue().clone());
+				clonedPatch.patches.put(entry.getKey(), entry.getValue().clone());
 			}
 			return clonedPatch;
 		} catch (CloneNotSupportedException cnse) {

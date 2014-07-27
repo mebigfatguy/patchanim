@@ -783,7 +783,7 @@ public class JPatchSamplePanel extends JPanel {
 		PatchCoords coords = patch.getPatch(color);
 		int order = coords.getOrder();
 		
-		PatchCoords srcCoords = (PatchCoords)coords.clone();
+		PatchCoords srcCoords = coords.clone();
 
 		for (int i = 0; i < order; i++) {
 			for (int j = 0; j < order; j++) {

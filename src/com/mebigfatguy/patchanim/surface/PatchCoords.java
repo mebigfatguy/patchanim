@@ -62,13 +62,13 @@ public class PatchCoords implements Serializable, Cloneable {
 	}
 	
 	@Override
-	public Object clone() {
+	public PatchCoords clone() {
 		try {
 			PatchCoords clonedCoords = (PatchCoords)super.clone();
 			clonedCoords.coords = new Coordinate[order][order];
 			for (int u = 0; u < order; u++) {
 				for (int v = 0; v < order; v++) {
-					clonedCoords.coords[u][v] = (Coordinate)coords[u][v].clone();
+					clonedCoords.coords[u][v] = coords[u][v].clone();
 				}
 			}
 			return clonedCoords;

@@ -271,7 +271,7 @@ public class JPatchListPanel extends JPanel {
 			public void actionPerformed(ActionEvent ae) {
 				int selIndex = patchList.getSelectedIndex();
 				CombinedPatch patch = (CombinedPatch)patchListModel.getElementAt(selIndex);
-				CombinedPatch newPatch = (CombinedPatch)patch.clone();
+				CombinedPatch newPatch = patch.clone();
 				patchListModel.add(selIndex + 1, newPatch);
 				patchList.setSelectedIndex(selIndex + 1);
 				removeButton.setEnabled(true);
