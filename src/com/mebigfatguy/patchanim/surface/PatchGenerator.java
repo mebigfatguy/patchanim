@@ -194,9 +194,13 @@ public class PatchGenerator {
 		}
 		
 		Graphics graphics = image.getGraphics();
-		graphics.setColor(color);
-		graphics.fillRect(0, 0, sampleSizeX, sampleSizeY);
-		return image;
+		try {
+			graphics.setColor(color);
+			graphics.fillRect(0, 0, sampleSizeX, sampleSizeY);
+			return image;
+		} finally {
+			graphics.dispose();
+		}
 	}
 	
 	public static void buildCoefficients(double t, double[] coeffs) {
