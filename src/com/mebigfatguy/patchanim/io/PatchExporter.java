@@ -184,7 +184,7 @@ public class PatchExporter implements PatchCompletionListener {
 		}
 	}
 	
-	private int calcImageCount(PatchAnimDocument document) {
+	private static int calcImageCount(PatchAnimDocument document) {
 		int numPatches = document.getPatches().size();
 		int total = (numPatches - 1) * document.getTweenCount() + (numPatches - 1);
 		
