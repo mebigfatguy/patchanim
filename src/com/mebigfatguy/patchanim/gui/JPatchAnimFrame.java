@@ -1,6 +1,6 @@
 /*
  * patchanim - A bezier surface patch color blend animation builder
- * Copyright (C) 2008-2014 Dave Brosius
+ * Copyright (C) 2008-2015 Dave Brosius
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
