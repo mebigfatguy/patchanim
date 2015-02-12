@@ -53,7 +53,7 @@ public class JPatchListPanel extends JPanel {
 	private static final String UPBUTTON = "/com/mebigfatguy/patchanim/up.gif";
 	private static final String DOWNBUTTON = "/com/mebigfatguy/patchanim/down.gif";
 	
-	private JList patchList;
+	private JList<CombinedPatch> patchList;
 	private PatchListModel patchListModel;
 	private JButton addButton;
 	private JButton removeButton;
@@ -70,7 +70,7 @@ public class JPatchListPanel extends JPanel {
 		setLayout(new BorderLayout(4, 4));
 		
 		patchListModel = new PatchListModel();
-		patchList = new JList(patchListModel);
+		patchList = new JList<>(patchListModel);
 		patchList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION );
 		patchList.setPreferredSize(new Dimension(200, 300));
 		add(new JScrollPane(patchList), BorderLayout.CENTER);
@@ -118,7 +118,7 @@ public class JPatchListPanel extends JPanel {
 						patchListModel = new PatchListModel(dce.getDocument());
 						patchList.setModel(patchListModel);
 						patchList.setSelectedIndex(0);
-						mediator.setNewActivePatch((CombinedPatch)patchListModel.getElementAt(0));
+						mediator.setNewActivePatch(patchListModel.getElementAt(0));
 						enabledMovementCtrls();
 						removeButton.setEnabled(patchListModel.getSize() > 1);
 						
@@ -156,7 +156,7 @@ public class JPatchListPanel extends JPanel {
 					}
 					patchList.setSelectedIndex(selIndex);
 					PatchPanelMediator ppMediator = PatchPanelMediator.getMediator();
-					ppMediator.setNewActivePatch((CombinedPatch)patchListModel.getElementAt(selIndex));
+					ppMediator.setNewActivePatch(patchListModel.getElementAt(selIndex));
 					removeButton.setEnabled(patchListModel.getSize() > 1);
 					enabledMovementCtrls();
 				}
@@ -168,7 +168,7 @@ public class JPatchListPanel extends JPanel {
 			public void actionPerformed(ActionEvent ae) {
 				int selIndex = patchList.getSelectedIndex();
 				if (selIndex > 0) {
-					CombinedPatch patch = (CombinedPatch) patchListModel.getElementAt(selIndex);
+					CombinedPatch patch = patchListModel.getElementAt(selIndex);
 					patchListModel.remove(selIndex);
 					selIndex--;
 					patchListModel.add(selIndex, patch);
@@ -183,7 +183,7 @@ public class JPatchListPanel extends JPanel {
 			public void actionPerformed(ActionEvent ae) {
 				int selIndex = patchList.getSelectedIndex();
 				if ((selIndex >= 0) && (selIndex < (patchListModel.getSize() - 1))) {
-					CombinedPatch patch = (CombinedPatch) patchListModel.getElementAt(selIndex);
+					CombinedPatch patch = patchListModel.getElementAt(selIndex);
 					patchListModel.remove(selIndex);
 					selIndex++;
 					patchListModel.add(selIndex, patch);
@@ -200,7 +200,7 @@ public class JPatchListPanel extends JPanel {
 				if (!e.getValueIsAdjusting()) {
 					int selIndex = patchList.getSelectedIndex();
 					if (selIndex >= 0) {
-						CombinedPatch newPatch = (CombinedPatch)patchListModel.getElementAt(selIndex);
+						CombinedPatch newPatch = patchListModel.getElementAt(selIndex);
 						PatchPanelMediator ppMediator = PatchPanelMediator.getMediator();
 						ppMediator.setNewActivePatch(newPatch);
 						enabledMovementCtrls();
@@ -213,7 +213,7 @@ public class JPatchListPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent me) {
 				if (me.getClickCount() == 2) {
-					CombinedPatch patch = (CombinedPatch)patchList.getSelectedValue();
+					CombinedPatch patch = patchList.getSelectedValue();
 					if (patch != null) {
 						renamePatch(patch);
 					}
@@ -258,7 +258,7 @@ public class JPatchListPanel extends JPanel {
 		renameItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				CombinedPatch patch = (CombinedPatch)patchList.getSelectedValue();
+				CombinedPatch patch = patchList.getSelectedValue();
 				if (patch != null) {
 					renamePatch(patch);
 				}
@@ -270,7 +270,7 @@ public class JPatchListPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				int selIndex = patchList.getSelectedIndex();
-				CombinedPatch patch = (CombinedPatch)patchListModel.getElementAt(selIndex);
+				CombinedPatch patch = patchListModel.getElementAt(selIndex);
 				CombinedPatch newPatch = patch.clone();
 				patchListModel.add(selIndex + 1, newPatch);
 				patchList.setSelectedIndex(selIndex + 1);

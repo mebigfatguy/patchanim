@@ -55,10 +55,10 @@ public class JPatchControlPanel extends JPanel {
 	private PatchAnimDocument document;
 	private JTextField widthField;
 	private JTextField heightField;
-	private JComboBox animationCB;
-	private JComboBox outOfBoundsColorCB;
+	private JComboBox<AnimationType> animationCB;
+	private JComboBox<OutOfBoundsColor> outOfBoundsColorCB;
 	private JTextField tweenFramesField;
-	private JComboBox tweenStyleCB;
+	private JComboBox<TweenStyle> tweenStyleCB;
 	private JButton testButton;
 	
 	public JPatchControlPanel() {
@@ -103,7 +103,7 @@ public class JPatchControlPanel extends JPanel {
 		add(Box.createVerticalStrut(5));
 		{
 			animationLabel = new JLabel(rb.getString(PatchAnimBundle.ANIMATION));
-			animationCB = new JComboBox(new Object[] { AnimationType.None,
+			animationCB = new JComboBox<>(new AnimationType[] { AnimationType.None,
 													   AnimationType.Cycle,
 													   AnimationType.Wave });
 			animationLabel.setLabelFor(animationCB);
@@ -116,7 +116,7 @@ public class JPatchControlPanel extends JPanel {
 		add(Box.createVerticalStrut(5));	
 		{
 			outOfBoundsLabel = new JLabel(rb.getString(PatchAnimBundle.OUTOFBOUNDSCOLOR));
-			outOfBoundsColorCB = new JComboBox(new Object[] { OutOfBoundsColor.Clip,
+			outOfBoundsColorCB = new JComboBox<>(new OutOfBoundsColor[] { OutOfBoundsColor.Clip,
 															  OutOfBoundsColor.Cycle,
 															  OutOfBoundsColor.Wave });
 			outOfBoundsColorCB.setToolTipText(rb.getString(PatchAnimBundle.OUTOFBOUNDSCOLOR_TT));
@@ -139,7 +139,7 @@ public class JPatchControlPanel extends JPanel {
 		{
 			tweenStyleLabel = new JLabel(rb.getString(PatchAnimBundle.TWEENSTYLE));
 			EnumSet<TweenStyle> ts = EnumSet.<TweenStyle>allOf(TweenStyle.class);
-			tweenStyleCB = new JComboBox(ts.toArray(new TweenStyle[ts.size()]));
+			tweenStyleCB = new JComboBox<>(ts.toArray(new TweenStyle[ts.size()]));
 			tweenStyleLabel.setLabelFor(tweenStyleCB);
 			tweenStyleCB.setToolTipText(rb.getString(PatchAnimBundle.TWEENSTYLE_TT));
 			outOfBoundsLabel.setLabelFor(tweenStyleCB);

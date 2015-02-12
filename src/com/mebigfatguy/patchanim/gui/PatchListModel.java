@@ -25,7 +25,7 @@ import javax.swing.AbstractListModel;
 import com.mebigfatguy.patchanim.PatchAnimDocument;
 import com.mebigfatguy.patchanim.surface.CombinedPatch;
 
-public class PatchListModel extends AbstractListModel {
+public class PatchListModel extends AbstractListModel<CombinedPatch> {
 
 	private static final long serialVersionUID = -4980398874234658317L;
 	
@@ -60,7 +60,7 @@ public class PatchListModel extends AbstractListModel {
 	}
 	
 	@Override
-	public Object getElementAt(int index) {
+	public CombinedPatch getElementAt(int index) {
 		if (doc == null)
 			return null;
 

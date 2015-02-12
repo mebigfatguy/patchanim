@@ -42,7 +42,7 @@ public class NewDocumentDialog extends JDialog {
 	
 	private static final long serialVersionUID = 6141957372893989399L;
 	
-	private JComboBox orderCombo;
+	private JComboBox<Integer> orderCombo;
 	private JCheckBox useAlpha;
 	private JButton ok;
 	private JButton cancel;
@@ -59,7 +59,7 @@ public class NewDocumentDialog extends JDialog {
 		setTitle(rb.getString(PatchAnimBundle.NEWDOCUMENT));
 		cp.setLayout(new BoxLayout(cp, BoxLayout.Y_AXIS));
 		JLabel orderLabel = new JLabel(rb.getString(PatchAnimBundle.SETORDER));
-		orderCombo = new JComboBox(new Object[] { Integer.valueOf(2),
+		orderCombo = new JComboBox<>(new Integer[] { Integer.valueOf(2),
 												  Integer.valueOf(3),
 										          Integer.valueOf(4),
 										          Integer.valueOf(5),
