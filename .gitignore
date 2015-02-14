@@ -1,9 +1,7 @@
-classes
-*.jar
-*.zip
 .svn
 .settings
 .~lock.yank.*
 version.properties
-htdocs
+target
+lib
 
