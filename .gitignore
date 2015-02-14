@@ -5,3 +5,4 @@ version.properties
 target
 lib
 
+/classes/

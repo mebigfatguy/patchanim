@@ -135,6 +135,11 @@
 				<include name="*.jnlp"/>
 			</fileset>
 		</copy>
+		<copy todir="${htdocs.dir}">
+			<fileset dir="${etc.dir}/htdocs">
+			    <include name="*"/>
+			</fileset>
+		</copy>
 		<replaceregexp byline="true">
   			<regexp pattern="\$VERSION"/>
   			<substitution expression="${patchanim.version}"/>

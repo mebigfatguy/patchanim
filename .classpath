@@ -6,5 +6,5 @@
 	<classpathentry kind="lib" path="lib/xml-apis-1.4.01.jar"/>
 	<classpathentry kind="lib" path="lib/serializer-2.7.2.jar"/>
 	<classpathentry kind="lib" path="lib/xalan-2.7.2.jar"/>
-	<classpathentry kind="output" path="classes"/>
+	<classpathentry kind="output" path="target/classes"/>
 </classpath>
