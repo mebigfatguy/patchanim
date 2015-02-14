@@ -25,10 +25,11 @@
 	<property file="version.properties"/>
 	
 	<property name="src.dir" value="${basedir}/src"/>
-	<property name="classes.dir" value="${basedir}/classes"/>
+	<property name="target.dir" value="${basedir}/target"/>
+	<property name="classes.dir" value="${target.dir}/classes"/>
 	<property name="lib.dir" value="${basedir}/lib"/>
 	<property name="etc.dir" value="${basedir}/etc"/>
-	<property name="htdocs.dir" value="${basedir}/htdocs"/>
+	<property name="htdocs.dir" value="${target.dir}/htdocs"/>
 	<property name="jnlp.dir" value="${htdocs.dir}/jnlp"/>
 	<property name="javadoc.dir" value="${htdocs.dir}/javadoc"/>
 	<property name="javac.source" value="1.7"/>
@@ -39,17 +40,7 @@
 	<property name="patchanim.version" value="1.3.0"/>
 	
 	<target name="clean" description="removes all generated collateral">
-		<delete dir="${classes.dir}"/>
-		<delete dir="${javadoc.dir}"/>
-		<delete failonerror="false">
-			<fileset dir="${jnlp.dir}">
-				<include name="patchanim*.jar"/>
-				<include name="*.jnlp"/>
-			</fileset>
-		</delete>
-		<delete>
-    		<fileset dir="${basedir}" includes="*.zip"/>
-  		</delete>
+		<delete dir="${target.dir}"/>
 	</target>
 	
 	<path id="patchanim.classpath">
@@ -77,6 +68,7 @@
 	
 	<target name="-init" depends="yank" description="prepares repository for a build">
 		<mkdir dir="${lib.dir}"/>
+		<mkdir dir="${target.dir}"/>
 		<mkdir dir="${classes.dir}"/>
 		<mkdir dir="${javadoc.dir}"/>
 	</target>
@@ -174,8 +166,8 @@
 		</jar>	
 	</target>
 	
-	<target name="srczip" description="builds the source distribution zip file">
-		<zip destfile="${basedir}/patchanim-src-${patchanim.version}.zip" 
+	<target name="srcjar" description="builds the source distribution jar file">
+		<zip destfile="${basedir}/patchanim-src-${patchanim.version}-source.jar" 
 			 basedir="${basedir}"
 			 includes="src/**/*.java, src/**/*.properties, src/**/*.gif, src/**/*.xsd, src/**/*.xsl, lib/**/*.jar, *.txt"/>
 	</target>
@@ -187,7 +179,7 @@
 				 destdir="${javadoc.dir}"
 				 windowtitle="patchanim api">
 		    <doctitle><![CDATA[<h1>patchanim javadoc</h1>]]></doctitle>
-		    <bottom><![CDATA[<i>Copyright &#169; 2008-2012 MeBigFatGuy.com. All Rights Reserved.</i>]]></bottom>
+		    <bottom><![CDATA[<i>Copyright &#169; 2008-2015 MeBigFatGuy.com. All Rights Reserved.</i>]]></bottom>
 		</javadoc>
 	</target>
 	
@@ -239,6 +231,6 @@
 			 includes="patchanim-${patchanim.version}.jar xml-apis-${xml-apis.version}.jar xercesImpl-${xercesImpl.version}.jar xalan-${xalan.version}.jar serializer-${serializer-version}.jar"/>
 	</target>
 	
-	<target name="release" depends="build, jnlp, binzip, srczip, javadoc" description="prepares everything for a release"/>
+	<target name="release" depends="build, jnlp, binzip, srcjar, javadoc" description="prepares everything for a release"/>
 
 </project>
