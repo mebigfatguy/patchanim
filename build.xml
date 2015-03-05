@@ -60,7 +60,7 @@
     
    <target name="yank" unless="no.yank" description="pulls down required artifacts from maven" xmlns:yank="antlib:com.mebigfatguy.yank">
         <mkdir dir="${lib.dir}"/>
-        <yank:yank yankFile="${basedir}/yank.xls" destination="${lib.dir}" source="true">
+        <yank:yank yankFile="${basedir}/yank.xls" destination="${lib.dir}" source="true" separateClassifierTypes="true">
             <server url="http://jcenter.bintray.com"/>
             <generateVersions propertyFileName="${basedir}/version.properties" />
         </yank:yank>
