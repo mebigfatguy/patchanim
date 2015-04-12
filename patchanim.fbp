@@ -1,0 +1,8 @@
+<Project projectName="patchanim">
+  <Jar>./target/classes</Jar>
+  <AuxClasspathEntry>./lib/serializer-2.7.2.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>./lib/xalan-2.7.2.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>./lib/xercesImpl-2.11.0.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>./lib/xml-apis-1.4.01.jar</AuxClasspathEntry>
+  <SrcDir>./src</SrcDir>
+</Project>
