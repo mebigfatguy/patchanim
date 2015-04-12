@@ -21,7 +21,6 @@ package com.mebigfatguy.patchanim.gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.event.ActionEvent;
@@ -826,7 +825,7 @@ public class JPatchSamplePanel extends JPanel {
 			
 			g.drawImage(image, 0, 0, (int)bounds.getWidth(), (int)bounds.getHeight(), 0, 0, SAMPLE_SIZE, SAMPLE_SIZE, null);
 			if (decorator != null)
-				decorator.drawDecoration(((Graphics2D) g), g.getClipBounds());
+				decorator.drawDecoration(g, g.getClipBounds());
 		} finally {
 			g.setClip(clip);
 		}

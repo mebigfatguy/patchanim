@@ -20,7 +20,7 @@ package com.mebigfatguy.patchanim.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ResourceBundle;
@@ -148,7 +148,7 @@ public class JColorControlPatchPanel extends JPanel implements PatchDecorator {
 	}
 	
 	@Override
-	public void drawDecoration(Graphics2D g, Rectangle bounds) {
+	public void drawDecoration(Graphics g, Rectangle bounds) {
 		if (coords == null)
 			return;
 		

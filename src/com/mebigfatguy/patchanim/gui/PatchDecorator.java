@@ -18,12 +18,12 @@
  */
 package com.mebigfatguy.patchanim.gui;
 
-import java.awt.Graphics2D;
+import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 
 public interface PatchDecorator {
-	void drawDecoration(Graphics2D g, Rectangle bounds);
+	void drawDecoration(Graphics g, Rectangle bounds);
 	
 	boolean press(Point p, Rectangle bounds);
 	
