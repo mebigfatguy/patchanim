@@ -18,6 +18,7 @@
  */
 package com.mebigfatguy.patchanim;
 
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import com.mebigfatguy.patchanim.main.PatchAnimBundle;
@@ -43,6 +44,6 @@ public enum OutOfBoundsColor {
 	@Override
 	public String toString() {
 		ResourceBundle rb = PatchAnimBundle.getBundle();
-		return rb.getString(PatchAnimBundle.ROOT + OOB + name().toLowerCase());
+		return rb.getString(PatchAnimBundle.ROOT + OOB + name().toLowerCase(Locale.ENGLISH));
 	}
 }
