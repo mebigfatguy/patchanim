@@ -177,7 +177,6 @@ public class JPatchAnimFrame extends JFrame {
 		newItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				ResourceBundle rb = PatchAnimBundle.getBundle();
 				try {
 					if (document.isDirty()) {
 						int choice = askSave();
@@ -190,6 +189,7 @@ public class JPatchAnimFrame extends JFrame {
 					
 					newDocument();
 				} catch (IOException ioe) {
+					ResourceBundle rb = PatchAnimBundle.getBundle();
 					JOptionPane.showMessageDialog(JPatchAnimFrame.this, rb.getString(PatchAnimBundle.SAVEFAILED));
 				}
 			}
