@@ -59,19 +59,19 @@ public class PatchAnimIO {
     }
 
     public static void saveFile(File f, PatchAnimDocument document) throws IOException {
-        InputStream xslIs = null;
-        OutputStream xmlOs = null;
         Path temporary = Files.createTempFile("patchanim", ".paf");
-        try {
+        try (InputStream xslIs = new BufferedInputStream(PatchAnimIO.class.getResourceAsStream("/com/mebigfatguy/patchanim/io/PatchAnimDoc.xsl"))) {
+
             TransformerFactory tf = TransformerFactory.newInstance();
-            xslIs = new BufferedInputStream(PatchAnimIO.class.getResourceAsStream("/com/mebigfatguy/patchanim/io/PatchAnimDoc.xsl"));
             Transformer t = tf.newTransformer(new StreamSource(xslIs));
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document d = db.newDocument();
-            xmlOs = new BufferedOutputStream(Files.newOutputStream(temporary));
-            t.setParameter("doc", document);
-            t.transform(new DOMSource(d), new StreamResult(xmlOs));
+
+            try (OutputStream xmlOs = new BufferedOutputStream(Files.newOutputStream(temporary))) {
+                t.setParameter("doc", document);
+                t.transform(new DOMSource(d), new StreamResult(xmlOs));
+            }
             document.setDirty(false);
         } catch (IOException ioe) {
             throw ioe;
@@ -80,21 +80,19 @@ public class PatchAnimIO {
             ioe.initCause(e);
             throw ioe;
         } finally {
-            Closer.close(xslIs);
-            Closer.close(xmlOs);
             f.delete();
             Files.move(temporary, f.toPath());
         }
     }
 
     public static PatchAnimDocument loadFile(File f) throws IOException {
-        InputStream xmlIs = null;
 
-        try {
+        try (InputStream xmlIs = new BufferedInputStream(Files.newInputStream(f.toPath()))) {
+
             XMLReader reader = XMLReaderFactory.createXMLReader();
             PatchAnimDocContentHandler handler = new PatchAnimDocContentHandler();
             reader.setContentHandler(handler);
-            xmlIs = new BufferedInputStream(Files.newInputStream(f.toPath()));
+
             reader.setFeature("http://apache.org/xml/features/validation/schema", true);
             reader.setFeature("http://xml.org/sax/features/validation", true);
             reader.setProperty("http://apache.org/xml/properties/schema/external-noNamespaceSchemaLocation",
@@ -108,8 +106,6 @@ public class PatchAnimIO {
             IOException ioe = new IOException("Failed loading document " + f.getPath());
             ioe.initCause(e);
             throw ioe;
-        } finally {
-            Closer.close(xmlIs);
         }
     }
 
